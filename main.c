@@ -1,4 +1,5 @@
-#define F_CPU 4915200// Clock Speed
+//#define F_CPU 4915200// Clock Speed
+#define F_CPU 8e6// Clock Speed
 #define BAUD 9600
 #define MYUBRR F_CPU/16/BAUD-1
 
@@ -27,6 +28,14 @@ void USART_Transmit( unsigned char data )
     UDR1 = data;
 }
 
+void ymsePrint(const char* string)
+{
+    for(int c=0; c<sizeof(string)/sizeof(char); c++)
+    {
+        USART_Transmit(string[c]);
+    }
+}
+
 
 
 void main( void )
@@ -35,9 +44,12 @@ void main( void )
     USART_Init ( MYUBRR );
     while (1)
     {
-        USART_Transmit('S');
-        _delay_ms(200);
+        ymsePrint("Hello");
+        _delay_ms(2000);
     }
     
 
 }
+
+
+    
