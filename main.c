@@ -7,6 +7,8 @@
 #include <avr/io.h>
 #include <util/delay.h> // Delay functions
 
+#include <string.h>
+
 void USART_Init( unsigned int ubrr )
 {
     /* Set baud rate */
@@ -30,7 +32,7 @@ void USART_Transmit( unsigned char data )
 
 void ymsePrint(const char* string)
 {
-    for(int c=0; c<sizeof(string)/sizeof(char); c++)
+    for(int c=0; c<strlen(string); c++)
     {
         USART_Transmit(string[c]);
     }
