@@ -28,3 +28,18 @@ void USART_print_string(const char* string)
         USART_Transmit(string[c]);
     }
 }
+
+unsigned char USART_Receive( void )
+{
+    /* Wait for data to be received */
+    while ( !(UCSR1A & (1<<RXC1)) );
+    
+    /* Get and return received data from buffer */
+    return UDR1;
+}
+
+void testUSART_Receive()
+{
+    uint8_t message = USART_Receive();
+    USART_print_string(&message);
+}
