@@ -6,6 +6,7 @@
 
 ## Task 1
 - Made USART support
+- 9600 7N1 (7 databits, 1 stop bit)
 
 ## Task 2
  - Components
