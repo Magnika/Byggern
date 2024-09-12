@@ -3,7 +3,7 @@
 #define BAUD 9600
 #define MYUBRR F_CPU/16/BAUD-1
 
-#include "usart.h" // USART support
+#include "include/usart.h" // USART support
 
 #include <util/delay.h> // Delay functions
 
@@ -12,7 +12,7 @@ void main( void )
     USART_Init ( MYUBRR );
     while (1)
     {
-        ymsePrint("Hello");
+        USART_print_string("Hello");
         _delay_ms(2000);
     }
 }
