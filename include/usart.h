@@ -13,5 +13,7 @@ void USART_Transmit( unsigned char data );
 
 void USART_print_string(const char* string);
 
+unsigned char USART_Receive( void );
+
 #endif // USART_H
 
