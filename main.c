@@ -4,6 +4,7 @@
 #define MYUBRR F_CPU/16/BAUD-1
 
 #include "include/usart.h" // USART support
+#include "include/sram_test.h"
 
 #include <util/delay.h> // Delay functions
 
@@ -32,14 +33,25 @@ void AD70_pullup_activate()
     PORTA = (1<<PA0) | (1<<PA1) | (1<<PA2) | (1<<PA3) | (1<<PA4) | (1<<PA5) | (1<<PA6) | (1<<PA7);
 }
 
+void test_EXT_MEM()
+{
+    SRE_bit_enable();
+    AD70_pullup_activate();
+
+    SRAM_test();
+}
+
+
 void main( void )
 {
     USART_Init ( MYUBRR );
-    SRE_bit_enable();
+    test_EXT_MEM();
+    /*
     while (1)
     {
         //USART_print_string("Hello");
         testUSART_Receive();
         _delay_ms(200);
     }
+    */
 }
