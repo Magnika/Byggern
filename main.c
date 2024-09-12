@@ -7,12 +7,22 @@
 
 #include <util/delay.h> // Delay functions
 
+/**
+ * @brief Set the SRE bit in the MCUCR register. This enables the use of external SRAM.
+ * 
+ */
+void SRE_bit_enable()
+{
+    MCUCR |= 0b10000000;
+}
+
 void main( void )
 {
     USART_Init ( MYUBRR );
+    SRE_bit_enable();
     while (1)
     {
         USART_print_string("Hello");
-        _delay_ms(2000);
+        _delay_ms(200);
     }
 }
