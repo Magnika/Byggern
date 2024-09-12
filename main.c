@@ -18,7 +18,8 @@
  */
 void SRE_bit_enable()
 {
-    MCUCR |= 0b10000000;
+    //MCUCR |= 0b10000000;
+    MCUCR = (1<<SRE);
 }
 
 /**
