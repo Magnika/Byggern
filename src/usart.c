@@ -35,11 +35,11 @@ unsigned char USART_Receive( void )
     while ( !(UCSR1A & (1<<RXC1)) );
     
     /* Get and return received data from buffer */
-    return UDR;
+    return UDR1;
 }
 
 void testUSART_Receive()
 {
-    char message = USART_Receive();
-    USART_print_string(message);
+    uint8_t message = USART_Receive();
+    USART_print_string(&message);
 }

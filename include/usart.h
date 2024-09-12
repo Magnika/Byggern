@@ -15,5 +15,7 @@ void USART_print_string(const char* string);
 
 unsigned char USART_Receive( void );
 
+void testUSART_Receive();
+
 #endif // USART_H
 

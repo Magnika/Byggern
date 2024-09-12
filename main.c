@@ -8,7 +8,11 @@
 #include <util/delay.h> // Delay functions
 
 /**
- * @brief Set the SRE bit in the MCUCR register. This enables the use of external SRAM.
+ * @brief Set the SRE bit in the MCUCR register. This enables the use of external SRAM.'
+ * @details Writing SRE to one enables the External Memory Interface.The pin functions AD7:0, A15:8,
+    ALE, WR, and RD are activated as the alternate pin functions. The SRE bit overrides any pin
+    direction settings in the respective Data Direction Registers. Writing SRE to zero, disables the
+    External Memory Interface and the normal pin and data direction settings are used.
  * 
  */
 void SRE_bit_enable()
@@ -22,7 +26,8 @@ void main( void )
     SRE_bit_enable();
     while (1)
     {
-        USART_print_string("Hello");
+        //USART_print_string("Hello");
+        testUSART_Receive();
         _delay_ms(200);
     }
 }
