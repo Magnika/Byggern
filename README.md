@@ -14,7 +14,7 @@
 ## Task 2
  - Components
    - Latch ( 74ALS573 )
-   - SRAM IC ( )
+   - SRAM IC ( IDT 7164 S20TPG)
    - A/D Converter
    - LCD display
    - Adress latch ( STK501 )
