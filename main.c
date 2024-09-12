@@ -20,6 +20,18 @@ void SRE_bit_enable()
     MCUCR |= 0b10000000;
 }
 
+/**
+* @brief Activtes pull up  resistors on AD7:0 ports.
+* @details The pull-up resistors on the AD7:0 ports may be activated if the corresponding Port register is
+    written to one. To reduce power consumption in sleep mode, it is recommended to disable the
+    p   ull-ups by writing the Port register to zero before entering sleep.
+
+**/
+void AD70_pullup_activate()
+{
+    PORTA = (1<<PA0) | (1<<PA1) | (1<<PA2) | (1<<PA3) | (1<<PA4) | (1<<PA5) | (1<<PA6) | (1<<PA7);
+}
+
 void main( void )
 {
     USART_Init ( MYUBRR );
