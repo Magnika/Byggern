@@ -1,4 +1,9 @@
+#ifndef SRAM_H
+#define SRAM_H
+
 #include "avr.h"
+
+#define SRAM_START_ADDR 0x1800; // Start address for the SRAM
 
 void SRAM_init();
 
@@ -20,3 +25,5 @@ void SRE_bit_enable();
 
 **/
 void AD70_pullup_activate();
+
+#endif // SRAM_H

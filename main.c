@@ -6,6 +6,7 @@
 #include "include/usart.h" // USART support
 #include "include/avr.h"
 #include "include/sram_test.h"
+#include "include/decoder_test.h"
 #include "include/sram.h"
 
 #include <util/delay.h> // Delay functions
@@ -36,12 +37,14 @@ void main( void )
     stdout = &usart_std_out;
 
     test_EXT_MEM();
-    /*
+    //test_decoder();
+
     while (1)
     {
         //USART_print_string("Hello");
-        testUSART_Receive();
-        _delay_ms(200);
+        test_decoder();
+        _delay_ms(10);
+        //SRAM_test();
     }
-    */
+    
 }
