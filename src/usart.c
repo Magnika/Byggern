@@ -43,20 +43,3 @@ void testUSART_Receive()
     uint8_t message = USART_Receive();
     USART_print_string(&message);
 }
-
-static int USART_put_char(char c, FILE *stream)
-{
-    while ( !( UCSR1A & (1<<UDRE1)));
-    UDR1 = c;
-    
-    return 0;
-}
-
-static int USART_get_char(FILE *stream)
-{
-    /* Wait for data to be received */
-    while ( !(UCSR1A & (1<<RXC1)) );
-    
-    /* Get and return received data from buffer */
-    return UDR1;
-}

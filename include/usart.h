@@ -18,8 +18,5 @@ unsigned char USART_Receive( void );
 
 void testUSART_Receive();
 
-static int USART_put_char(char c, FILE *stream);
-static int USART_get_char(FILE *stream);
-
 #endif // USART_H
 

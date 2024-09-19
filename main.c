@@ -9,6 +9,27 @@
 #include <util/delay.h> // Delay functions
 #include <stdio.h>
 
+
+
+static int USART_put_char(char c, FILE *stream)
+{
+    while ( !( UCSR1A & (1<<UDRE1)));
+    UDR1 = c;
+    
+    return 0;
+}
+
+static int USART_get_char(FILE *stream)
+{
+    /* Wait for data to be received */
+    while ( !(UCSR1A & (1<<RXC1)) );
+    
+    /* Get and return received data from buffer */
+    return UDR1;
+}
+
+static FILE usart_std_out = FDEV_SETUP_STREAM(USART_put_char, USART_get_char, _FDEV_SETUP_RW);
+
 /**
  * @brief Set the SRE bit in the MCUCR register. This enables the use of external SRAM.'
  * @details Writing SRE to one enables the External Memory Interface.The pin functions AD7:0, A15:8,
@@ -56,7 +77,10 @@ void test_EXT_MEM()
 void main( void )
 {
     USART_Init ( MYUBRR );
-    test_EXT_MEM();
+    stdout = &usart_std_out;
+    printf("Hello world!");
+
+    //test_EXT_MEM();
     /*
     while (1)
     {
