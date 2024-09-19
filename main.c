@@ -58,19 +58,28 @@ void AD70_pullup_activate()
 
 void test_EXT_MEM()
 {
-    SRE_bit_enable();
-    AD70_pullup_activate();
-
-    //DDRC = 0xFF;
-    //PORTC = 0x00;
-    //DDRA = 0xFF;
-
-    SFIOR = (0<<XMM1) | (0<<XMM0) | (1<<XMM2);
-
-    USART_print_string("Setting SRW10...\n");
-    //MCUCR |= (0<<SRW10);
+    SRAM_init();
 
     SRAM_test();
+}
+
+void SRAM_init()
+{
+    SRE_bit_enable();
+    AD70_pullup_activate();
+    SFIOR = (0<<XMM1) | (0<<XMM0) | (1<<XMM2);
+}
+
+void custom_test_SRAM()
+{
+    SRAM_init();
+    volatile char *ext_ram = (char *) 0x1800; // Start address for the SRAM
+    uint16_t ext_ram_size = 0x800;
+
+    ext_ram[1] = (uint8_t) 69;
+    printf("Just wrote nice number");
+    uint8_t received = ext_ram[1];
+    printf("Just received %d", received);
 }
 
 
@@ -78,9 +87,8 @@ void main( void )
 {
     USART_Init ( MYUBRR );
     stdout = &usart_std_out;
-    printf("Hello world!");
 
-    //test_EXT_MEM();
+    test_EXT_MEM();
     /*
     while (1)
     {
