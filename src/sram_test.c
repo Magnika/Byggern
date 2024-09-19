@@ -34,3 +34,21 @@ void SRAM_test(void)
     }
     printf("SRAM test completed with \n%4d errors in write phase and \n%4d errors in retrieval phase\n\n", write_errors, retrieval_errors);
 }
+
+void custom_test_SRAM()
+{
+    SRAM_init();
+    volatile char *ext_ram = (char *) 0x1800; // Start address for the SRAM
+    uint16_t ext_ram_size = 0x800;
+
+    ext_ram[1] = (uint8_t) 69;
+    printf("Just wrote nice number");
+    uint8_t received = ext_ram[1];
+    printf("Just received %d", received);
+}
+
+void test_EXT_MEM()
+{
+    SRAM_init();
+    SRAM_test();
+}

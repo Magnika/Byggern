@@ -1,12 +1,11 @@
 #ifndef USART_H
 #define USART_H
 
-#define __AVR_ATmega162__ // Get port definitions for ATMega162
-
 #include <stdint.h>
 #include <stdio.h>
-#include <avr/io.h>
 #include <string.h>
+
+#include "avr.h"
 
 void USART_Init( unsigned int ubrr );
 
