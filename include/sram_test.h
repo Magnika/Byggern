@@ -8,4 +8,4 @@
 
 void SRAM_test(void);
 
-#endif SRAM_test_H
+#endif // SRAM_test_H
