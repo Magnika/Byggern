@@ -13,9 +13,12 @@
 
 ## Task 2
  - Components
-   - Latch ( 74ALS573 )
+   - Latch ( 74ALS573 )c
+   - 
    - SRAM IC ( IDT 7164 S20TPG)
    - A/D Converter
    - LCD display
    - Adress latch ( STK501 )
- - 
+ - DEBUG
+   - Latch-Enable (orange wire, LE) high --> Q=D. LE low --> Q is latched.
+   - 
