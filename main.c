@@ -7,6 +7,7 @@
 #include "include/sram_test.h"
 
 #include <util/delay.h> // Delay functions
+#include <stdio.h>
 
 /**
  * @brief Set the SRE bit in the MCUCR register. This enables the use of external SRAM.'
@@ -38,6 +39,15 @@ void test_EXT_MEM()
 {
     SRE_bit_enable();
     AD70_pullup_activate();
+
+    //DDRC = 0xFF;
+    //PORTC = 0x00;
+    //DDRA = 0xFF;
+
+    SFIOR = (0<<XMM1) | (0<<XMM0) | (1<<XMM2);
+
+    USART_print_string("Setting SRW10...\n");
+    //MCUCR |= (0<<SRW10);
 
     SRAM_test();
 }
