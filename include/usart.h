@@ -4,6 +4,7 @@
 #define __AVR_ATmega162__ // Get port definitions for ATMega162
 
 #include <stdint.h>
+#include <stdio.h>
 #include <avr/io.h>
 #include <string.h>
 
@@ -16,6 +17,9 @@ void USART_print_string(const char* string);
 unsigned char USART_Receive( void );
 
 void testUSART_Receive();
+
+static int USART_put_char(char c, FILE *stream);
+static int USART_get_char(FILE *stream);
 
 #endif // USART_H
 
