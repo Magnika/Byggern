@@ -46,7 +46,10 @@ void main( void )
     {
         //USART_print_string("Hello");
         //test_decoder();
-        _delay_ms(10);
+        adc_setChipSelect();
+        _delay_ms(100);
+        adc_unsetChipSelect();
+        _delay_ms(100);
         //SRAM_test();
     }
     
