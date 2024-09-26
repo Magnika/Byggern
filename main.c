@@ -8,6 +8,7 @@
 #include "include/sram_test.h"
 #include "include/decoder_test.h"
 #include "include/sram.h"
+#include "include/adc.h"
 
 #include <util/delay.h> // Delay functions
 #include <stdio.h>
@@ -36,13 +37,13 @@ void main( void )
     USART_Init ( MYUBRR );
     stdout = &usart_std_out;
 
-    test_EXT_MEM();
+    setHardWired();
     //test_decoder();
 
     while (1)
     {
         //USART_print_string("Hello");
-        test_decoder();
+        //test_decoder();
         _delay_ms(10);
         //SRAM_test();
     }
