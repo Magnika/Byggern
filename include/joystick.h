@@ -21,12 +21,12 @@ struct SliderVoltage
 };
 volatile struct SliderVoltage sliderVoltage;
 
-void joystick_read(struct JoystickVoltage* pJoystickVoltage);
+void joystick_read(struct JoystickVoltage* pJoystickVoltage, struct SliderVoltage* pSliderVoltage);
 
-float joystickVoltageToAngleX(uint8_t voltage);
-float joystickVoltageToAngleY(uint8_t voltage);
+float joystick_voltage_to_angle_x(uint8_t voltage);
+float joystick_voltage_to_angle_y(uint8_t voltage);
 
-float joystickVoltageToSlider(uint8_t voltage);
+float joystick_voltage_to_slider(uint8_t voltage);
 
 
 #endif // JOYSTICK_H
