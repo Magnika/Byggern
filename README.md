@@ -61,3 +61,10 @@
     where N is the number of channels converted.
 
     - ![alt text](pictures/image.png)
+
+
+- Left slider --> PWM PB4
+- Right slider --> PWM PD1
+
+
+- End-of-day: The joystick pcb is fucked. There is no signal coming out of PB4 and PD1. Double checked against another group's pcb.
