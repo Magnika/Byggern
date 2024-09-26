@@ -6,4 +6,6 @@ void setHardWired()
     OCR1A = 0x0000;
 
     TCCR1B = (1 << WGM12) | (1 << WGM13);
+
+    DDRD |= (1 << DD5);
 }
