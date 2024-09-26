@@ -32,7 +32,7 @@ void AD70_pullup_activate();
  * @param addr 
  * @return uint8_t 
  */
-uint8_t sram_read(uint8_t* addr);
+uint8_t sram_read(int* addr);
 
 /**
  * @brief Writes to some addres
@@ -40,6 +40,6 @@ uint8_t sram_read(uint8_t* addr);
  * @param addr 
  * @return uint8_t 
  */
-void sram_write(uint8_t* addr, uint8_t value);
+void sram_write(int* addr, uint8_t value);
 
 #endif // SRAM_H
