@@ -37,7 +37,9 @@ void main( void )
     USART_Init ( MYUBRR );
     stdout = &usart_std_out;
 
-    setHardWired();
+    SRAM_init();
+
+    adc_setHardWired();
     //test_decoder();
 
     while (1)

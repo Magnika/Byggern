@@ -1,6 +1,6 @@
 #include "adc.h"
 
-void setHardWired()
+void adc_setHardWired()
 {
     TCCR1A = (1 << WGM10) | (1 << WGM11) | (1 << COM1A0) | (0 << COM1A1);
     OCR1A = 0x0000;
@@ -9,3 +9,20 @@ void setHardWired()
 
     DDRD |= (1 << DD5);
 }
+
+void adc_setChipSelect()
+{
+    volatile char* adc = (char *) ADC_MEM_ADDR;
+    *adc = 0x1;
+}
+
+/**
+ * @brief Reads some value from SRAM, just to unset ADC chip select.
+ * 
+ */
+void adc_unsetChipSelect()
+{
+    volatile char* sram = (char *) 0x1800; 
+    uint8_t val = sram[1];
+}
+
