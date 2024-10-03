@@ -26,4 +26,20 @@ void SRE_bit_enable();
 **/
 void AD70_pullup_activate();
 
+/**
+ * @brief Reads from some addres
+ * @details WARNING, does not neccesariry read from SRAM but some addres that could be OLED or ADC
+ * @param addr 
+ * @return uint8_t 
+ */
+uint8_t sram_read(int* addr);
+
+/**
+ * @brief Writes to some addres
+ * @details WARNING, does not neccesariry write to SRAM but some addres that could be OLED or ADC
+ * @param addr 
+ * @return uint8_t 
+ */
+void sram_write(int* addr, uint8_t value);
+
 #endif // SRAM_H

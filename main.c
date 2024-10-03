@@ -8,9 +8,19 @@
 #include "include/sram_test.h"
 #include "include/decoder_test.h"
 #include "include/sram.h"
+#include "include/joystick.h"
 
 #include <util/delay.h> // Delay functions
 #include <stdio.h>
+
+static void avr_pwm_configure()
+{
+    TCCR1A = (1 << WGM10) | (1 << WGM11) | (1 << COM1A0) | (0 << COM1A1);
+    OCR1A = 0x0000;
+    //Side 132 i datablad. Still in PWM frekvens clk/256
+    TCCR1B = (1 << WGM12) | (1 << WGM13) | (0 << CS12) | (1 << CS11) | (0 << CS10); 
+    DDRD |= (1 << DD5);
+}
 
 static int USART_put_char(char c, FILE *stream)
 {
@@ -36,15 +46,17 @@ void main( void )
     USART_Init ( MYUBRR );
     stdout = &usart_std_out;
 
-    test_EXT_MEM();
+    SRAM_init();
+
+    avr_pwm_configure();
     //test_decoder();
 
     while (1)
     {
-        //USART_print_string("Hello");
-        test_decoder();
-        _delay_ms(10);
-        //SRAM_test();
+        joystick_read(&joystickVoltage, &sliderVoltage);
+        _delay_ms(1000);
+        printf("X= %d, Y=%d\n\r", get_joystick_angle_x(), get_joystick_angle_y());
+        printf("A= %d, B=%d\n\r", get_slider_pos(sliderVoltage.sliderA), get_slider_pos(sliderVoltage.sliderB));
     }
     
 }
