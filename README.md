@@ -67,7 +67,13 @@
 - Right slider --> PWM PD1
 
 Filter setup
-- PB4
+- PWM PB4 --> Input Filter 1 
+- PWM PD1 --> Input Filter 2
+- Output filter 1 --> Purple conductor to AIN2
+- Output filter 2 --> Green conductor to AIN3 
 
-
-- End-of-day: The joystick pcb is fucked. There is no signal coming out of PB4 and PD1. Double checked against another group's pcb.
+ADC setup
+- Joystick Pin 1 --> AIN0
+- Joystick Pin 2 --> AIN1
+- Slider Pin 1 --> AIN2
+- Slider Pin 2 --> AIN3
