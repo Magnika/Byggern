@@ -70,8 +70,8 @@
 - Right button --> PD0
 
 Filter setup
-- PWM PB4 --> Input Filter 1 
-- PWM PD1 --> Input Filter 2
+- PWM PB4 --> Input Filter pin 1 
+- PWM PD1 --> Input Filter pin 5
 - Output filter 1 --> Grey conductor to AIN2
 - Output filter 2 --> Blue conductor to AIN3 
 
@@ -80,3 +80,6 @@ ADC setup
 - Joystick Pin 2 --> AIN1
 - Left Slider Pin 1 --> AIN2
 - Right Slider Pin 2 --> AIN3
+
+Joystick:
+- 
