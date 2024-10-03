@@ -55,8 +55,8 @@ void main( void )
     {
         joystick_read(&joystickVoltage, &sliderVoltage);
         _delay_ms(1000);
-        //printf("X= %d, Y=%d\n", get_joystick_angle_x(), get_joystick_angle_y());
-        printf("A= %d, B=%d\n", get_slider_pos(sliderVoltage.sliderA), get_slider_pos(sliderVoltage.sliderB));
+        printf("X= %d, Y=%d\n\r", get_joystick_angle_x(), get_joystick_angle_y());
+        printf("A= %d, B=%d\n\r", get_slider_pos(sliderVoltage.sliderA), get_slider_pos(sliderVoltage.sliderB));
     }
     
 }
