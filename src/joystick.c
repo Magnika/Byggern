@@ -28,10 +28,10 @@ int get_joystick_angle_y()
     return angle;
 }
 
-float joystick_voltage_to_slider(uint8_t voltage)
+int get_slider_pos(uint8_t voltage)
 {
-    float sliderPos = 0;
-    // TODO: Convert voltage to position
+    float angle_f = ((float) voltage)/255.0f;
+    int pos = (int) (angle_f * 100);
 
-    return sliderPos;
+    return pos;
 }

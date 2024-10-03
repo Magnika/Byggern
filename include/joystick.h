@@ -26,7 +26,7 @@ void joystick_read(struct JoystickVoltage* pJoystickVoltage, struct SliderVoltag
 int get_joystick_angle_x();
 int get_joystick_angle_y();
 
-float joystick_voltage_to_slider(uint8_t voltage);
+int get_slider_pos(uint8_t voltage);
 
 
 #endif // JOYSTICK_H
