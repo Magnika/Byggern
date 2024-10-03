@@ -23,8 +23,8 @@ volatile struct SliderVoltage sliderVoltage;
 
 void joystick_read(struct JoystickVoltage* pJoystickVoltage, struct SliderVoltage* pSliderVoltage);
 
-float joystick_voltage_to_angle_x(uint8_t voltage);
-float joystick_voltage_to_angle_y(uint8_t voltage);
+int get_joystick_angle_x();
+int get_joystick_angle_y();
 
 float joystick_voltage_to_slider(uint8_t voltage);
 

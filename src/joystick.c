@@ -10,18 +10,22 @@ void joystick_read(struct JoystickVoltage* pJoystickVoltage, struct SliderVoltag
     pSliderVoltage->sliderB = sram_read((int *) 0x1401);
 }
 
-float joystick_voltage_to_angle_x(uint8_t voltage)
+int get_joystick_angle_x()
 {
-    float xPos = 0;
+    uint8_t voltage = joystickVoltage.xValue;
+    float angle_f = ((float) voltage - (255.0f/2))/128.0f;
+    int angle = (int) (angle_f * 100);
 
-    return xPos;
+    return angle;
 }
 
-float joystick_voltage_to_angle_y(uint8_t voltage)
+int get_joystick_angle_y()
 {
-    float yPos = 0;
+    uint8_t voltage = joystickVoltage.yValue;
+    float angle_f = ((float) voltage - (255.0f/2))/128.0f;
+    int angle = (int) (angle_f * 100);
 
-    return yPos;
+    return angle;
 }
 
 float joystick_voltage_to_slider(uint8_t voltage)
