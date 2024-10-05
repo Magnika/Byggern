@@ -42,6 +42,14 @@ void oled_init()
     oled_write_c(0xa4); //out follows RAM content
     oled_write_c(0xa6); //set normal display
     oled_write_c(0xaf); // display on
+
+    for(uint8_t i=0; i<OLED_NUM_PAGES; i++)
+    {
+        for(uint8_t j=0; j<OLED_NUM_COLUMNS; j++)
+        {
+            oled_write_d(' ', i, j);
+        }
+    }
 }
 
 void oled_write(uint8_t dataOrCommand, char address)

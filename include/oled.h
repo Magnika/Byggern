@@ -5,6 +5,8 @@
 #include <util/delay.h>
 
 #define ASCII_TABLE_OFFSET 32
+#define OLED_NUM_PAGES 8
+#define OLED_NUM_COLUMNS 128
 
 void oled_cs_test();
 void oled_init();
