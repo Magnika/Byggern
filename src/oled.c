@@ -98,7 +98,7 @@ void oled_print_menu()
 {
     oled_write_c(0xa4);
     oled_printf("Menu", 0, 50);
-    oled_printf("====", 2, 50);
+    oled_printf("~~~~", 2, 50);
     oled_printf("Option1", 4, 40);
     oled_printf("Option2", 5, 40);
 }
