@@ -11,7 +11,7 @@ void oled_print_char_test()
 {
     char test = 'A';
     //oled_write_c(0x40);
-    oled_write_d(test, 0, 0);
+    oled_write_d(test, 3, 60);
 }
 
 /**
@@ -84,11 +84,13 @@ void oled_write_d(char data, uint8_t page, uint8_t column)
     oled_write_c(page);
     oled_write_c(0xF);
 
-    const unsigned char* code = font8[data-ASCII_TABLE_OFFSET];
+    oled_write_c(0xa4);
+
+    const unsigned char* code = &(font8[data-ASCII_TABLE_OFFSET][0]);
     for(uint8_t i=0; i<8; i++)
     {
         uint8_t byte = pgm_read_byte(&(code[i]));
-        ext_oled_data[0] = code[i];
+        ext_oled_data[0] = byte;
         _delay_us(1);
     }
 }

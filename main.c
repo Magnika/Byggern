@@ -53,13 +53,13 @@ void main( void )
     _delay_us(1000);
     oled_init();
     _delay_us(1000);  
-    oled_write_c(0xa4);
+    //oled_write_c(0xa5);
 
     while (1)
     {
-        
-        
-        _delay_us(50);        
+        //oled_write_c(0xa5);
+        oled_print_char_test();
+        _delay_ms(1000);        
     }
     
 }
