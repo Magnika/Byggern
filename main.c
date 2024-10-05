@@ -48,19 +48,18 @@ void main( void )
     stdout = &usart_std_out;
 
     SRAM_init();
-
     avr_pwm_configure();
-    //test_decoder();
+    
+    _delay_us(1000);
+    oled_init();
+    _delay_us(1000);  
+    oled_write_c(0xa4);
 
     while (1)
     {
-        //joystick_read(&joystickVoltage, &sliderVoltage);
-        //printf("X= %d, Y=%d\n\r", get_joystick_angle_x(), get_joystick_angle_y());
-        //printf("A= %d, B=%d\n\r", get_slider_pos(sliderVoltage.sliderA), get_slider_pos(sliderVoltage.sliderB));
-
-        oled_cs_test();
-
-        _delay_us(10);
+        
+        
+        _delay_us(50);        
     }
     
 }

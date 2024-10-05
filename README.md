@@ -82,4 +82,8 @@ ADC setup
 - Right Slider Pin 2 --> AIN3
 
 Joystick:
+
+OLED:
+- Use 8080 parallell interface, might have to pin select it
+- ![alt text](pictures/OLED_timing.png)
 - 
