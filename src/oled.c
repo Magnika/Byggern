@@ -102,3 +102,13 @@ void oled_write_d(char data, uint8_t page, uint8_t column)
         _delay_us(1);
     }
 }
+
+void oled_printf(char* string, int length)
+{
+    uint8_t col = 63;
+    for (int i = 0; i < length; i++)
+    {
+        oled_write_d(string[i], 3, col+8*i);
+    }
+    
+}

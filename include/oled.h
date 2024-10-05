@@ -15,4 +15,6 @@ void oled_write_c(char c);
 void oled_write_d(char data, uint8_t page, uint8_t column);
 void oled_print_char_test();
 
+void oled_printf(char string[], int length);
+
 #endif // OLED_H
