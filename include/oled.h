@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <util/delay.h>
+#include <string.h>
 
 #define ASCII_TABLE_OFFSET 32
 #define OLED_NUM_PAGES 8
@@ -15,6 +16,6 @@ void oled_write_c(char c);
 void oled_write_d(char data, uint8_t page, uint8_t column);
 void oled_print_char_test();
 
-void oled_printf(char string[], int length);
+void oled_printf(char* string, int page, int column);
 
 #endif // OLED_H

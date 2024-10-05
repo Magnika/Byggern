@@ -83,6 +83,19 @@ void oled_write_d(char data, uint8_t page, uint8_t column)
 {
     volatile char *ext_oled_data = (char *) 0x1200; // Start address for the OLED command memory space
 
+    const unsigned char* code = &(font8[data-ASCII_TABLE_OFFSET][0]);
+    for(uint8_t i=0; i<8; i++)
+    {
+        uint8_t byte = pgm_read_byte(&(code[i]));
+        ext_oled_data[0] = byte;
+    }
+}
+
+void oled_printf(char* string, int page, int column)
+{
+    oled_write_c(0xa4);
+    int length = strlen(string);
+
     // Set page and column to write
     oled_write_c(0x21);
     oled_write_c(column);
@@ -92,23 +105,10 @@ void oled_write_d(char data, uint8_t page, uint8_t column)
     oled_write_c(page);
     oled_write_c(0xF);
 
-    oled_write_c(0xa4);
-
-    const unsigned char* code = &(font8[data-ASCII_TABLE_OFFSET][0]);
-    for(uint8_t i=0; i<8; i++)
-    {
-        uint8_t byte = pgm_read_byte(&(code[i]));
-        ext_oled_data[0] = byte;
-        _delay_us(1);
-    }
-}
-
-void oled_printf(char* string, int length)
-{
-    uint8_t col = 63;
+    
     for (int i = 0; i < length; i++)
     {
-        oled_write_d(string[i], 3, col+8*i);
+        oled_write_d(string[i], page, column+8*i);
     }
     
 }

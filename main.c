@@ -50,14 +50,10 @@ void main( void )
     SRAM_init();
     avr_pwm_configure();
     
-    _delay_us(1000);
     oled_init();
-    _delay_us(1000);  
-    //oled_write_c(0xa5);
-    oled_print_char_test();
+    oled_printf("Hallo", 3, 0);
     while (1)
     {
-        oled_print_char_test();
         _delay_ms(1000);        
     }
     
