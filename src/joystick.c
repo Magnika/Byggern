@@ -10,8 +10,8 @@ void joystick_update(struct JoystickVoltage* pJoystickVoltage, struct SliderVolt
     pSliderVoltage->sliderB = sram_read((int *) 0x1401);
 
     pJoystickState->isButtonPressed = joystick_detect_button_pressed(0); // TODO: Take button as input
-    pJoystickState->isJoystickEngagedX = joystick_detect_position(abs(get_joystick_angle_x()));
-    pJoystickState->isJoystickEngagedY = joystick_detect_position(abs(get_joystick_angle_y()));
+    pJoystickState->isJoystickEngagedX = joystick_detect_position(get_joystick_angle_x());
+    pJoystickState->isJoystickEngagedY = joystick_detect_position(get_joystick_angle_y());
 }
 
 int get_joystick_angle_x()
@@ -47,6 +47,10 @@ uint8_t joystick_detect_position(int positionPercentage)
     {
         return 1;
     }
+    if(-positionPercentage>threshold)
+    {
+        return -1;
+    }
     return 0;
 }
 
@@ -59,20 +63,12 @@ uint8_t joystick_detect_button_pressed(int buttonInput)
     return 0;
 }
 
-uint8_t joystick_is_engaged_x()
+uint8_t joystick_get_direction_x()
 {
-    if(joystickState.isJoystickEngagedX)
-    {
-        return 1;
-    }
-    return 0;
+    return joystick_detect_position(get_joystick_angle_x());
 }
 
-uint8_t joystick_is_engaged_y()
+uint8_t joystick_get_direction_y()
 {
-    if(joystickState.isJoystickEngagedY)
-    {
-        return 1;
-    }
-    return 0;
+    return joystick_detect_position(get_joystick_angle_y());
 }
