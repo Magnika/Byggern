@@ -1,9 +1,17 @@
 #include "oled.h"
+#include "fonts.h"
 
 void oled_cs_test()
 {
     volatile char *ext_oled = (char *) 0x1200; // Start address for the OLED
     ext_oled[0] = 69;
+}
+
+void oled_print_char_test()
+{
+    char test = 'A';
+    //oled_write_c(0x40);
+    oled_write_d(test, 0, 0);
 }
 
 /**
@@ -63,8 +71,24 @@ void oled_write_c(char c)
  * 
  * @param c 8-bit command
  */
-void oled_write_d(char data)
+void oled_write_d(char data, uint8_t page, uint8_t column)
 {
     volatile char *ext_oled_data = (char *) 0x1200; // Start address for the OLED command memory space
-    ext_oled_data[0] = data;
+
+    // Set page and column to write
+    oled_write_c(0x21);
+    oled_write_c(column);
+    oled_write_c(0x7F);
+
+    oled_write_c(0x22);
+    oled_write_c(page);
+    oled_write_c(0xF);
+
+    const unsigned char* code = font8[data-ASCII_TABLE_OFFSET];
+    for(uint8_t i=0; i<8; i++)
+    {
+        uint8_t byte = pgm_read_byte(&(code[i]));
+        ext_oled_data[0] = code[i];
+        _delay_us(1);
+    }
 }
