@@ -51,8 +51,8 @@ void main( void )
     avr_pwm_configure();
     
     oled_init();
-    oled_write_c(0xA5);
-    //oled_print_menu();
+    //oled_write_c(0xA5);
+    oled_print_menu();
     while (1)
     {
         _delay_ms(10);        

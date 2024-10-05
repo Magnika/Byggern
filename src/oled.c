@@ -7,13 +7,6 @@ void oled_cs_test()
     ext_oled[0] = 69;
 }
 
-void oled_print_char_test()
-{
-    char test = 'A';
-    //oled_write_c(0x40);
-    oled_write_d(test, 3, 60);
-}
-
 /**
  * @brief Taken from OLED datasheet
  * 
@@ -47,20 +40,9 @@ void oled_init()
     {
         for(uint8_t j=0; j<OLED_NUM_COLUMNS; j++)
         {
-            oled_write_d(' ', i, j);
+            oled_printf(" ", i, j);
         }
     }
-}
-
-void oled_write(uint8_t dataOrCommand, char address)
-{
-    // Set address
-
-    // Write enable (should be automatic, but check)
-
-    // Send data on data bus
-
-
 }
 
 /**
@@ -79,7 +61,7 @@ void oled_write_c(char c)
  * 
  * @param c 8-bit command
  */
-void oled_write_d(char data, uint8_t page, uint8_t column)
+void oled_write_d(char data)
 {
     volatile char *ext_oled_data = (char *) 0x1200; // Start address for the OLED command memory space
 
@@ -104,17 +86,17 @@ void oled_printf(char* string, int page, int column)
     oled_write_c(0x22);
     oled_write_c(page);
     oled_write_c(0xF);
-
     
     for (int i = 0; i < length; i++)
     {
-        oled_write_d(string[i], page, column+8*i);
+        oled_write_d(string[i]);
     }
     
 }
 
 void oled_print_menu()
 {
+    oled_write_c(0xa4);
     oled_printf("Menu", 0, 50);
     oled_printf("====", 2, 50);
     oled_printf("Option1", 4, 40);
