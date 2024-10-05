@@ -9,9 +9,21 @@ void joystick_update(struct JoystickVoltage* pJoystickVoltage, struct SliderVolt
     pSliderVoltage->sliderA = sram_read((int *) 0x1401);
     pSliderVoltage->sliderB = sram_read((int *) 0x1401);
 
-    pJoystickState->isButtonPressed = joystick_detect_button_pressed(0); // TODO: Take button as input
-    pJoystickState->isJoystickEngagedX = joystick_detect_position(get_joystick_angle_x());
-    pJoystickState->isJoystickEngagedY = joystick_detect_position(get_joystick_angle_y());
+    pJoystickState->isButtonPressedRisingEdge = joystick_detect_button_pressed(0); // TODO: Take button as input
+
+    if(joystick_get_direction_x() != pJoystickState->currentDirectionX)
+    {
+        pJoystickState->currentDirectionX = joystick_get_direction_x();
+    }
+    else
+    {
+        pJoystickState->currentDirectionX;
+    }
+
+    if(joystick_get_direction_y() != pJoystickState->currentDirectionY)
+    {
+        pJoystickState->currentDirectionY = joystick_get_direction_y();
+    }
 }
 
 int get_joystick_angle_x()
@@ -71,4 +83,9 @@ int8_t joystick_get_direction_x()
 int8_t joystick_get_direction_y()
 {
     return joystick_detect_position(get_joystick_angle_y());
+}
+
+void joystick_init()
+{
+    DDRD &= (0b11111101 << DD1);
 }

@@ -9,15 +9,45 @@
 #define OLED_NUM_PAGES 8
 #define OLED_NUM_COLUMNS 128
 
+/**
+ * @brief Test the OLED CS signal, must use scope
+ * 
+ */
 void oled_cs_test();
-void oled_init();
-void oled_write(uint8_t dataOrCommand, char address);
-void oled_write_c(char c);
-void oled_write_d(char data);
-void oled_print_char_test();
 
+/**
+ * @brief Sends a series of datasheet recommended commands to the oled
+ * 
+ */
+void oled_init();
+
+/**
+ * @brief Write a single command to the OLED
+ * 
+ * @param c 
+ */
+void oled_write_c(char c);
+
+/**
+ * @brief Write a single byte of data to the OLED
+ * 
+ * @param data 
+ */
+void oled_write_d(char data);
+
+/**
+ * @brief Print a string to the OLED at a determined starting page and column
+ * 
+ * @param string 
+ * @param page 
+ * @param column 
+ */
 void oled_printf(char* string, int page, int column);
 
+/**
+ * @brief Print the application main menu on the OLED
+ * 
+ */
 void oled_print_menu();
 
 /**

@@ -18,10 +18,32 @@ typedef void (*state_function)(uint8_t event);
 
 state_function state;
 
+/**
+ * @brief State function for menu in option 1
+ * 
+ * @param event 
+ */
 static void state_option_1(uint8_t event);
+
+/**
+ * @brief State function for menu in option 2
+ * 
+ * @param event 
+ */
 static void state_option_2(uint8_t event);
+
+/**
+ * @brief State function for menu in option 3
+ * 
+ * @param event 
+ */
 static void state_option_3(uint8_t event);
 
+
+/**
+ * @brief Start the HSM
+ * 
+ */
 void hsm_run();
 
 #endif // HSM_H

@@ -36,6 +36,11 @@ void oled_init()
     oled_write_c(0xa6); //set normal display
     oled_write_c(0xaf); // display on
 
+    oled_clear_display();
+}
+
+void oled_clear_display()
+{
     for(uint8_t i=0; i<OLED_NUM_PAGES; i++)
     {
         for(uint8_t j=0; j<OLED_NUM_COLUMNS; j++)

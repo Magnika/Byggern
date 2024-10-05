@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include "sram.h"
 #include <util/delay.h>
+#include <avr.h>
 
 struct JoystickVoltage
 {
@@ -24,17 +25,41 @@ volatile struct SliderVoltage sliderVoltage;
 
 struct JoystickState
 {
-    uint8_t isButtonPressed;
-    uint8_t isJoystickEngagedX;
-    uint8_t isJoystickEngagedY;
+    uint8_t isButtonPressedRisingEdge;
+    uint8_t currentDirectionX;
+    uint8_t currentDirectionY;
 };
 volatile struct JoystickState joystickState;
 
+/**
+ * @brief Sample the joystick position and button
+ * 
+ * @param pJoystickVoltage 
+ * @param pSliderVoltage 
+ * @param pJoystickState 
+ */
 void joystick_update(struct JoystickVoltage* pJoystickVoltage, struct SliderVoltage* pSliderVoltage, struct JoystickState* pJoystickState);
 
+/**
+ * @brief Compute the joytick angle in the X direction as a percentage
+ * 
+ * @return int 
+ */
 int get_joystick_angle_x();
+
+/**
+ * @brief Compute the joytick angle in the Y direction as a percentage
+ * 
+ * @return int 
+ */
 int get_joystick_angle_y();
 
+/**
+ * @brief Get the slider pos position as a percentage
+ * 
+ * @param voltage 
+ * @return int 
+ */
 int get_slider_pos(uint8_t voltage);
 
 /**
@@ -63,5 +88,11 @@ int8_t joystick_get_direction_x();
  * @brief Return direction of joystick in y direction
  */
 int8_t joystick_get_direction_y();
+
+/**
+ * @brief Perform joystick initialization
+ * 
+ */
+void joystick_init();
 
 #endif // JOYSTICK_H

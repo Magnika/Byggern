@@ -50,30 +50,41 @@ void main( void )
 
     SRAM_init();
     avr_pwm_configure();
+    joystick_init();
     
     oled_init();
     oled_print_menu();
     hsm_run();
 
     uint8_t event;
+    int busy = 0;
     while (1)
     {
-        _delay_ms(500);
         joystick_update(&joystickVoltage, &sliderVoltage, &joystickState);
-        if(joystick_get_direction_y()>0)
+        if(joystickState.currentDirectionY>0 && !busy)
         {
+            busy = 1;
             event = EVENT_JOYSTICK_UP;
         }
-        else if(joystick_get_direction_y()<0)
+        else if(joystickState.currentDirectionY<0 && !busy)
         {
+            busy = 1;
             event = EVENT_JOYSTICK_DOWN;
         }
+        
+        else if((PIND & (1<<PD1)) && !busy)
+        {
+            busy=1;
+            event = EVENT_JOYSTICK_PUSHED;
+        }
+
         else
         {
+            busy=0;
             event = EVENT_NAN;
         }
         hsm_dispatch(event);
-        _delay_ms(500);        
+        _delay_ms(10);        
     }
     
 }
