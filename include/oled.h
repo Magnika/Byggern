@@ -18,4 +18,6 @@ void oled_print_char_test();
 
 void oled_printf(char* string, int page, int column);
 
+void oled_print_menu();
+
 #endif // OLED_H
