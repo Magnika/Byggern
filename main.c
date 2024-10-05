@@ -9,6 +9,7 @@
 #include "include/decoder_test.h"
 #include "include/sram.h"
 #include "include/joystick.h"
+#include "include/oled.h"
 
 #include <util/delay.h> // Delay functions
 #include <stdio.h>
@@ -53,10 +54,13 @@ void main( void )
 
     while (1)
     {
-        joystick_read(&joystickVoltage, &sliderVoltage);
-        _delay_ms(1000);
-        printf("X= %d, Y=%d\n\r", get_joystick_angle_x(), get_joystick_angle_y());
-        printf("A= %d, B=%d\n\r", get_slider_pos(sliderVoltage.sliderA), get_slider_pos(sliderVoltage.sliderB));
+        //joystick_read(&joystickVoltage, &sliderVoltage);
+        //printf("X= %d, Y=%d\n\r", get_joystick_angle_x(), get_joystick_angle_y());
+        //printf("A= %d, B=%d\n\r", get_slider_pos(sliderVoltage.sliderA), get_slider_pos(sliderVoltage.sliderB));
+
+        oled_cs_test();
+
+        _delay_us(10);
     }
     
 }
