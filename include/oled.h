@@ -26,4 +26,17 @@ void oled_print_menu();
  */
 void oled_clear_display();
 
+/**
+ * @brief Prints a cursor at the designated option
+ * 
+ * @param option_nr 
+ */
+void oled_print_cursor_at_option(uint8_t option_nr);
+
+/**
+ * @brief Clears all pages for cursors. NOTE: does not check that in menu!!
+ * 
+ */
+void oled_clear_cursor();
+
 #endif // OLED_H

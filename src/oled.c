@@ -102,3 +102,22 @@ void oled_print_menu()
     oled_printf("Option1", 4, 40);
     oled_printf("Option2", 5, 40);
 }
+
+void oled_print_cursor_at_option(uint8_t option_nr)
+{
+    uint8_t option_page_base = 4;
+    uint8_t option_column_nr = 112;
+    oled_write_c(0xa4);
+    oled_printf("<-", option_page_base+(option_nr-1), option_column_nr);
+}
+
+void oled_clear_cursor()
+{
+    uint8_t option_column_nr = 112;
+
+    oled_write_c(0xa4);
+    for(uint8_t i=0; i<OLED_NUM_PAGES; i++)
+    {
+        oled_printf("  ", i, option_column_nr);
+    }
+}

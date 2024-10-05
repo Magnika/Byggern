@@ -53,9 +53,12 @@ void main( void )
     oled_init();
     //oled_write_c(0xA5);
     oled_print_menu();
+    oled_print_cursor_at_option(1);
+    _delay_ms(1000);
+    oled_clear_cursor();
     while (1)
     {
-        _delay_ms(10);        
+        _delay_ms(1000);        
     }
     
 }
