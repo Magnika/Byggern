@@ -1,6 +1,6 @@
 #include "joystick.h"
 
-void joystick_read(struct JoystickVoltage* pJoystickVoltage, struct SliderVoltage* pSliderVoltage)
+void joystick_update(struct JoystickVoltage* pJoystickVoltage, struct SliderVoltage* pSliderVoltage, struct JoystickState* pJoystickState)
 {
     sram_write((int *) 0x1401, (uint8_t) 0b0);
     _delay_us(300);
@@ -8,6 +8,10 @@ void joystick_read(struct JoystickVoltage* pJoystickVoltage, struct SliderVoltag
     pJoystickVoltage->yValue = sram_read((int *) 0x1401);
     pSliderVoltage->sliderA = sram_read((int *) 0x1401);
     pSliderVoltage->sliderB = sram_read((int *) 0x1401);
+
+    pJoystickState->isButtonPressed = joystick_detect_button_pressed(0); // TODO: Take button as input
+    pJoystickState->isJoystickEngagedX = joystick_detect_position(abs(get_joystick_angle_x()));
+    pJoystickState->isJoystickEngagedY = joystick_detect_position(abs(get_joystick_angle_y()));
 }
 
 int get_joystick_angle_x()
@@ -34,4 +38,41 @@ int get_slider_pos(uint8_t voltage)
     int pos = (int) (angle_f * 100);
 
     return pos;
+}
+
+uint8_t joystick_detect_position(int positionPercentage)
+{
+    uint8_t threshold=50;
+    if(positionPercentage>threshold)
+    {
+        return 1;
+    }
+    return 0;
+}
+
+uint8_t joystick_detect_button_pressed(int buttonInput)
+{
+    if(buttonInput)
+    {
+        return 1;
+    }
+    return 0;
+}
+
+uint8_t joystick_is_engaged_x()
+{
+    if(joystickState.isJoystickEngagedX)
+    {
+        return 1;
+    }
+    return 0;
+}
+
+uint8_t joystick_is_engaged_y()
+{
+    if(joystickState.isJoystickEngagedY)
+    {
+        return 1;
+    }
+    return 0;
 }
