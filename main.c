@@ -10,6 +10,7 @@
 #include "include/sram.h"
 #include "include/joystick.h"
 #include "include/oled.h"
+#include "include/hsm.h"
 
 #include <util/delay.h> // Delay functions
 #include <stdio.h>
@@ -51,14 +52,28 @@ void main( void )
     avr_pwm_configure();
     
     oled_init();
-    //oled_write_c(0xA5);
     oled_print_menu();
-    oled_print_cursor_at_option(1);
-    _delay_ms(1000);
-    oled_clear_cursor();
+    hsm_run();
+
+    uint8_t event;
     while (1)
     {
-        _delay_ms(1000);        
+        _delay_ms(500);
+        joystick_update(&joystickVoltage, &sliderVoltage, &joystickState);
+        if(joystick_get_direction_y()>0)
+        {
+            event = EVENT_JOYSTICK_UP;
+        }
+        else if(joystick_get_direction_y()<0)
+        {
+            event = EVENT_JOYSTICK_DOWN;
+        }
+        else
+        {
+            event = EVENT_NAN;
+        }
+        hsm_dispatch(event);
+        _delay_ms(500);        
     }
     
 }

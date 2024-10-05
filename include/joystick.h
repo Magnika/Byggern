@@ -44,7 +44,7 @@ int get_slider_pos(uint8_t voltage);
  * @return 1 if is exceeding pos, -1 if exceeding neg
  * @return 0 if is not exceeding
  */
-uint8_t joystick_detect_position(int positionPercentage);
+int8_t joystick_detect_position(int positionPercentage);
 
 /**
  * @brief Returns whether the button is pressed
@@ -52,16 +52,16 @@ uint8_t joystick_detect_position(int positionPercentage);
  * @param buttonInput 
  * @return 1 if is pressed, 0 otherwise 
  */
-uint8_t joystick_detect_button_pressed(int buttonInput);
+int8_t joystick_detect_button_pressed(int buttonInput);
 
 /**
  * @brief Return direction of joystick in x direction
  */
-uint8_t joystick_get_direction_x();
+int8_t joystick_get_direction_x();
 
 /**
  * @brief Return direction of joystick in y direction
  */
-uint8_t joystick_get_direction_y();
+int8_t joystick_get_direction_y();
 
 #endif // JOYSTICK_H

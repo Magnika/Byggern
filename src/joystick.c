@@ -40,7 +40,7 @@ int get_slider_pos(uint8_t voltage)
     return pos;
 }
 
-uint8_t joystick_detect_position(int positionPercentage)
+int8_t joystick_detect_position(int positionPercentage)
 {
     uint8_t threshold=50;
     if(positionPercentage>threshold)
@@ -54,7 +54,7 @@ uint8_t joystick_detect_position(int positionPercentage)
     return 0;
 }
 
-uint8_t joystick_detect_button_pressed(int buttonInput)
+int8_t joystick_detect_button_pressed(int buttonInput)
 {
     if(buttonInput)
     {
@@ -63,12 +63,12 @@ uint8_t joystick_detect_button_pressed(int buttonInput)
     return 0;
 }
 
-uint8_t joystick_get_direction_x()
+int8_t joystick_get_direction_x()
 {
     return joystick_detect_position(get_joystick_angle_x());
 }
 
-uint8_t joystick_get_direction_y()
+int8_t joystick_get_direction_y()
 {
     return joystick_detect_position(get_joystick_angle_y());
 }
