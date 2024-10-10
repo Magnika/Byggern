@@ -26,20 +26,20 @@ volatile struct SliderVoltage sliderVoltage;
 struct JoystickState
 {
     // State is_active
-    uint8_t isJoystickActuatedX;
-    uint8_t isJoystickActuatedY;
+    int isJoystickActuatedX;
+    int isJoystickActuatedY;
     // State is_active_prev
-    uint8_t isJoystickActuatedXPrev;
-    uint8_t isJoystickActuatedYPrev;
+    int isJoystickActuatedXPrev;
+    int isJoystickActuatedYPrev;
     // State is_button_pressed
-    uint8_t isButtonPressed;
+    int isButtonPressed;
     // State is_button_pressed_prev
-    uint8_t isButtonPressedPrev;
+    int isButtonPressedPrev;
 
     // Is rising edge
-    uint8_t isJoystickActuatedXRisingEdge;
-    uint8_t isJoystickActuatedYRisingEdge;
-    uint8_t isButtonPressedRisingEdge;
+    int isJoystickActuatedXRisingEdge;
+    int isJoystickActuatedYRisingEdge;
+    int isButtonPressedRisingEdge;
 };
 volatile struct JoystickState joystickState;
 
@@ -81,7 +81,7 @@ int get_slider_pos(uint8_t voltage);
  * @return 1 if is exceeding pos, -1 if exceeding neg
  * @return 0 if is not exceeding
  */
-int8_t joystick_detect_actuation(int positionPercentage);
+int joystick_detect_actuation(int positionPercentage);
 
 /**
  * @brief Returns whether the button is pressed

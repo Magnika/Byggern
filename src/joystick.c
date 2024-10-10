@@ -30,7 +30,7 @@ void joystick_update(struct JoystickVoltage* pJoystickVoltage, struct SliderVolt
         pJoystickState->isJoystickActuatedXRisingEdge = 0;
     }
 
-    if(pJoystickState->isJoystickActuatedY && !(pJoystickState->isJoystickActuatedYPrev==pJoystickState->isJoystickActuatedY))
+    if(pJoystickState->isJoystickActuatedY==1 && !(pJoystickState->isJoystickActuatedYPrev==pJoystickState->isJoystickActuatedY))
     {
         pJoystickState->isJoystickActuatedYRisingEdge = 1;
     }
@@ -83,9 +83,9 @@ int get_slider_pos(uint8_t voltage)
     return pos;
 }
 
-int8_t joystick_detect_actuation(int positionPercentage)
+int joystick_detect_actuation(int positionPercentage)
 {
-    uint8_t threshold=50;
+    int threshold=50;
     if(positionPercentage>threshold)
     {
         return 1;
@@ -108,12 +108,12 @@ int8_t joystick_detect_button_pressed(int buttonInput)
 
 int8_t joystick_get_direction_x()
 {
-    return joystick_detect_position(get_joystick_angle_x());
+    return joystick_detect_actuation(get_joystick_angle_x());
 }
 
 int8_t joystick_get_direction_y()
 {
-    return joystick_detect_position(get_joystick_angle_y());
+    return joystick_detect_actuation(get_joystick_angle_y());
 }
 
 void joystick_init()
