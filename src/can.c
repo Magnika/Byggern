@@ -22,6 +22,9 @@ void can_transmit(const can_frame_t* msg)
     }
 
     mcp2515_load_buffer(frame);
+
+    // Send can frame
+    mcp2515_request_to_send();
 }
 
 can_frame_t can_read()

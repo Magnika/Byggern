@@ -11,13 +11,13 @@ typedef struct
     uint8_t EID0;         // Extended identifier high byte
     uint8_t DLC;          // Data Length Code (0-8), also contains RTR at bit 6
     
-    uint8_t data[8];      // Data field (up to 8 bytes of data, depends on DLC)
+    char data[8];         // Data field (up to 8 bytes of data, depends on DLC)
 } can_frame_t;
 
 
 void can_init();
 
-void can_transmit();
+void can_transmit(const can_frame_t* msg);
 
 can_frame_t can_read();
 
