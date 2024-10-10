@@ -14,6 +14,8 @@
 #include "include/spi.h"
 #include "include/mcp2515.h"
 
+#include "include/interrupt.h"
+
 #include <util/delay.h> // Delay functions
 #include <stdio.h>
 
@@ -45,6 +47,24 @@ static int USART_get_char(FILE *stream)
 
 static FILE usart_std_out = FDEV_SETUP_STREAM(USART_put_char, USART_get_char, _FDEV_SETUP_RW);
 
+// CONFIGURE INTERRUPST IN MAIN, DOES NOT WORK IN C OR HEADER FOR SOME REASON
+ISR(INT0_vect)
+{
+    // TODO: Implement
+    printf("hei\n\r");
+}
+
+ISR(INT1_vect)
+{
+    // TODO: Implement
+}
+
+ISR(INT2_vect)
+{
+    // CAN CONTROLLER
+    // Find out which CAN interrupt triggered by reading CANINTF
+}
+
 void main( void )
 {
     USART_Init ( MYUBRR );
@@ -53,6 +73,7 @@ void main( void )
     SRAM_init();
     avr_pwm_configure();
     joystick_init();
+    configure_interrupts();
 
     spi_init();
     mcp2515_init();
