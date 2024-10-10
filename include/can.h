@@ -19,6 +19,6 @@ void can_init();
 
 void can_transmit();
 
-void can_read();
+can_frame_t can_read();
 
 #endif // CAN_H
