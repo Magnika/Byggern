@@ -16,6 +16,8 @@
 #define CANCTRL_ADDR 0x0F
 #define CANINTE_ADDR 0b00101011
 
+#define TBX0CTRL_ADDR 0b00110000
+
 char MCP2515_read_buffer();
 
 void mcp2515_load_buffer(char* data);
