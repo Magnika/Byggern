@@ -9,8 +9,8 @@ void mcp2515_init()
 
 char MCP2515_read_buffer()
 {
-    char commad[2] = {(char) MCP2515_READ_RX_BUFFER, '\0'};
-    return spi_transmit_byte(commad);
+    char command[2] = {(char) MCP2515_READ_RX_BUFFER, '\0'};
+    return spi_transmit_byte(command);
 }
 
 void mcp2515_load_buffer(char* data)
@@ -58,12 +58,14 @@ void mcp2515_write(char address, char* data)
 
 void mcp2515_request_to_send()
 {
-    spi_transmit_byte((char) MCP2515_REQUEST_TO_SEND);
+    char command[2] = {(char) MCP2515_REQUEST_TO_SEND, '\0'};
+    spi_transmit_byte(&command);
 }
 
 char mcp2515_read_status()
 {
-    return spi_transmit_byte((char) MCP2515_READ_STATUS);
+    char command[2] = {(char) MCP2515_READ_STATUS, '\0'};
+    return spi_transmit_byte(&command);
 }
 
 void mcp2515_bit_modify(char address, char mask, char data)
@@ -74,5 +76,6 @@ void mcp2515_bit_modify(char address, char mask, char data)
 
 void mcp2515_reset()
 {
-    spi_transmit_byte((char) MCP2515_RESET);
+    char command[2] = {(char) MCP2515_RESET, '\0'};
+    spi_transmit_byte(&command);
 }

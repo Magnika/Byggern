@@ -18,6 +18,9 @@
 
 #define TBX0CTRL_ADDR 0b00110000
 
+#define RXB0CTRL_ADDR 0b01100000
+#define RXB0SIDH_ADDR 0b01100001
+
 char MCP2515_read_buffer();
 
 void mcp2515_load_buffer(char* data);
