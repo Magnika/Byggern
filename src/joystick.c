@@ -9,21 +9,52 @@ void joystick_update(struct JoystickVoltage* pJoystickVoltage, struct SliderVolt
     pSliderVoltage->sliderA = sram_read((int *) 0x1401);
     pSliderVoltage->sliderB = sram_read((int *) 0x1401);
 
-    pJoystickState->isButtonPressedRisingEdge = joystick_detect_button_pressed(0); // TODO: Take button as input
+    pJoystickState->isButtonPressed = joystick_detect_button_pressed((PIND & (1<<PD1)));
 
-    if(joystick_get_direction_x() != pJoystickState->currentDirectionX)
+    pJoystickState->isJoystickActuatedX = joystick_detect_actuation(get_joystick_angle_x());
+    pJoystickState->isJoystickActuatedY = joystick_detect_actuation(get_joystick_angle_y());
+
+    // If state is_actuated and not state is_actuated_prev, then is_rising_edge
+    // If joystick is not actuated and state is_actuated_prev, then is_falling_edge
+
+    if(pJoystickState->isJoystickActuatedX==-1 && !(pJoystickState->isJoystickActuatedXPrev==pJoystickState->isJoystickActuatedX))
     {
-        pJoystickState->currentDirectionX = joystick_get_direction_x();
+        pJoystickState->isJoystickActuatedXRisingEdge = -1;
+    }
+    else if(pJoystickState->isJoystickActuatedX==1 && !(pJoystickState->isJoystickActuatedXPrev==pJoystickState->isJoystickActuatedX))
+    {
+        pJoystickState->isJoystickActuatedXRisingEdge = 1;
     }
     else
     {
-        pJoystickState->currentDirectionX;
+        pJoystickState->isJoystickActuatedXRisingEdge = 0;
     }
 
-    if(joystick_get_direction_y() != pJoystickState->currentDirectionY)
+    if(pJoystickState->isJoystickActuatedY && !(pJoystickState->isJoystickActuatedYPrev==pJoystickState->isJoystickActuatedY))
     {
-        pJoystickState->currentDirectionY = joystick_get_direction_y();
+        pJoystickState->isJoystickActuatedYRisingEdge = 1;
     }
+    else if(pJoystickState->isJoystickActuatedY==-1 && !(pJoystickState->isJoystickActuatedYPrev==pJoystickState->isJoystickActuatedY))
+    {
+        pJoystickState->isJoystickActuatedYRisingEdge = -1;
+    }
+    else
+    {
+        pJoystickState->isJoystickActuatedYRisingEdge = 0;
+    }
+
+    if(pJoystickState->isButtonPressed && !pJoystickState->isButtonPressedPrev)
+    {
+        pJoystickState->isButtonPressedRisingEdge = 1;
+    }
+    else
+    {
+        pJoystickState->isButtonPressedRisingEdge = 0;
+    }
+
+    pJoystickState->isJoystickActuatedXPrev = pJoystickState->isJoystickActuatedX;
+    pJoystickState->isJoystickActuatedYPrev = pJoystickState->isJoystickActuatedY;
+    pJoystickState->isButtonPressedPrev = pJoystickState->isButtonPressed;
 }
 
 int get_joystick_angle_x()
@@ -52,7 +83,7 @@ int get_slider_pos(uint8_t voltage)
     return pos;
 }
 
-int8_t joystick_detect_position(int positionPercentage)
+int8_t joystick_detect_actuation(int positionPercentage)
 {
     uint8_t threshold=50;
     if(positionPercentage>threshold)

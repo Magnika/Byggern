@@ -57,30 +57,25 @@ void main( void )
     hsm_run();
 
     uint8_t event;
-    int busy = 0;
     while (1)
     {
         joystick_update(&joystickVoltage, &sliderVoltage, &joystickState);
-        if(joystickState.currentDirectionY>0 && !busy)
+        if(joystickState.isJoystickActuatedYRisingEdge==1)
         {
-            busy = 1;
             event = EVENT_JOYSTICK_UP;
         }
-        else if(joystickState.currentDirectionY<0 && !busy)
+        else if(joystickState.isJoystickActuatedYRisingEdge==-1)
         {
-            busy = 1;
             event = EVENT_JOYSTICK_DOWN;
         }
         
-        else if((PIND & (1<<PD1)) && !busy)
+        else if(joystickState.isButtonPressedRisingEdge)
         {
-            busy=1;
             event = EVENT_JOYSTICK_PUSHED;
         }
 
         else
         {
-            busy=0;
             event = EVENT_NAN;
         }
         hsm_dispatch(event);
