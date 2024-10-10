@@ -5,22 +5,13 @@
 
 typedef struct
 {
-    uint8_t sof : 1;         // Start of Frame (1 bit)
+    uint8_t SIDH;         // Standard identifier high byte
+    uint8_t SIDL;         // Standard identifier low byte. Also contains EXIDE at bit 3 and EID[17:16] at bits[1:0]
+    uint8_t EID8;         // Extended identifier high byte
+    uint8_t EID0;         // Extended identifier high byte
+    uint8_t DLC;          // Data Length Code (0-8), also contains RTR at bit 6
     
-    uint16_t id : 11;        // 11-bit Identifier
-    uint8_t rtr : 1;         // Remote Transmission Request (1 bit)
-
-    uint8_t ide : 1;         // Identifier Extension (IDE), must be 0 for standard frame
-    uint8_t rb0 : 1;         // Reserved Bit Zero (RB0), must be 0
-    uint8_t dlc : 4;         // Data Length Code (DLC), 0-8 bytes
-    
-    uint8_t data[8];         // Data field (up to 8 bytes of data, depends on DLC)
-    
-    uint16_t crc : 15;       // 15-bit CRC sequence
-    uint8_t crc_delim : 1;   // CRC Delimiter (1 bit)
-    
-    uint8_t ack_slot : 1;    // ACK Slot (1 bit)
-    uint8_t ack_delim : 1;   // ACK Delimiter (1 bit)
+    uint8_t data[8];      // Data field (up to 8 bytes of data, depends on DLC)
 } can_frame_t;
 
 
