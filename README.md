@@ -112,3 +112,10 @@ OLED:
   the entire shift cycle is completed. When receiving data, however, a received character must be
   read from the SPI Data Register before the next character has been completely shifted in. Oth-
   erwise, the first byte is lost.
+
+## MCP2515
+- The MCP2515 expects the first byte after lowering CS to be the instruction/ command byte. This implies that CS must
+  be raised and then lowered again to invoke another command.
+
+- It is highly recommended that the Reset command be sent (or the RESET pin be lowered) as part of the power-on
+  initialization sequence.

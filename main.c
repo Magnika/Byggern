@@ -11,6 +11,8 @@
 #include "include/joystick.h"
 #include "include/oled.h"
 #include "include/hsm.h"
+#include "include/spi.h"
+#include "include/mcp2515.h"
 
 #include <util/delay.h> // Delay functions
 #include <stdio.h>
@@ -51,6 +53,9 @@ void main( void )
     SRAM_init();
     avr_pwm_configure();
     joystick_init();
+
+    spi_init();
+    mcp2515_init();
     
     oled_init();
     oled_print_menu();
@@ -79,7 +84,11 @@ void main( void )
             event = EVENT_NAN;
         }
         hsm_dispatch(event);
-        _delay_ms(10);        
+
+        //mcp2515_CAN_publish('e');
+        //printf("%c", MCP2515_read_buffer());
+        //mcp2515_write('a', 'e');
+        
     }
     
 }
