@@ -9,6 +9,8 @@
 #include "include/decoder_test.h"
 #include "include/sram.h"
 #include "include/joystick.h"
+#include "include/oled.h"
+#include "include/hsm.h"
 
 #include <util/delay.h> // Delay functions
 #include <stdio.h>
@@ -47,16 +49,37 @@ void main( void )
     stdout = &usart_std_out;
 
     SRAM_init();
-
     avr_pwm_configure();
-    //test_decoder();
+    joystick_init();
+    
+    oled_init();
+    oled_print_menu();
+    hsm_run();
 
+    uint8_t event;
     while (1)
     {
-        joystick_read(&joystickVoltage, &sliderVoltage);
-        _delay_ms(1000);
-        printf("X= %d, Y=%d\n\r", get_joystick_angle_x(), get_joystick_angle_y());
-        printf("A= %d, B=%d\n\r", get_slider_pos(sliderVoltage.sliderA), get_slider_pos(sliderVoltage.sliderB));
+        joystick_update(&joystickVoltage, &sliderVoltage, &joystickState);
+        if(joystickState.isJoystickActuatedYRisingEdge==1)
+        {
+            event = EVENT_JOYSTICK_UP;
+        }
+        else if(joystickState.isJoystickActuatedYRisingEdge==-1)
+        {
+            event = EVENT_JOYSTICK_DOWN;
+        }
+        
+        else if(joystickState.isButtonPressedRisingEdge)
+        {
+            event = EVENT_JOYSTICK_PUSHED;
+        }
+
+        else
+        {
+            event = EVENT_NAN;
+        }
+        hsm_dispatch(event);
+        _delay_ms(10);        
     }
     
 }
