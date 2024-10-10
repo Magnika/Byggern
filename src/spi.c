@@ -1,17 +1,22 @@
-#include "include/spi.h"
+#include "spi.h"
 
 
 void spi_init()
 {
     /* Set MOSI and SCK output, all others input */
-    DDRB = (1<<DDB5)|(1<<DDB7);
+    DDRB = (1<<DDB5)|(1<<DDB7)|(1<<DDB4);
     /* Enable SPI, Master, set clock rate fck/16 */
     SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0);
+    /*Set Chip select high*/
+    PORTB = (1<<PB4);
 }
 
 
 char spi_transmit_byte(char byte)
 {
+    /* Set SS' low */
+    PORTB = (0<<PB4);
+
     /* Start transmission */
     SPDR = byte;
     /* Wait for transmission complete */
@@ -19,5 +24,9 @@ char spi_transmit_byte(char byte)
 
     /* Read response in SPDR */
     char response = SPDR;
+    
+    /* Set SS' high */
+    PORTB = (1<<PB4);
+
     return response;
 }
