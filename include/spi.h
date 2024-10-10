@@ -17,6 +17,6 @@ void spi_init();
  * @param bytes 
  * @return char 
  */
-char spi_transmit_byte(char* bytes);
+char spi_transmit_byte(char* bytes, int length);
 
 #endif // SPI_H

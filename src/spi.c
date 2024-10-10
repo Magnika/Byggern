@@ -12,9 +12,8 @@ void spi_init()
 }
 
 
-char spi_transmit_byte(char* bytes)
+char spi_transmit_byte(char* bytes, int length)
 {
-    int length = strlen(bytes);
     /* Set SS' low */
     PORTB = (0<<PB4);
 

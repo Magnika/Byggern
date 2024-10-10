@@ -9,13 +9,13 @@ void mcp2515_init()
 
 char MCP2515_read_buffer()
 {
-    char command[2] = {(char) MCP2515_READ_RX_BUFFER, '\0'};
-    return spi_transmit_byte(command);
+    char command = (char) MCP2515_READ_RX_BUFFER;
+    return spi_transmit_byte(&command, 1);
 }
 
 void mcp2515_load_buffer(char* data)
 {
-    int length = sizeof(data)+2; // Command code, address and stop byte
+    int length = 14; // Command code, data
     char command[length];
 
     command[0] = (char) MCP2515_LOAD_TX_BUFFER;
@@ -23,9 +23,8 @@ void mcp2515_load_buffer(char* data)
     {
         command[i] = data[i-1];
     }
-    command[length-1] = '\0';
     
-    spi_transmit_byte(command);
+    spi_transmit_byte(command, length);
 }
 
 void mcp2515_CAN_publish(char data)
@@ -36,13 +35,13 @@ void mcp2515_CAN_publish(char data)
 
 char mcp2515_read(char address)
 {
-    char c[3] = {(char)MCP2515_READ, address, '\0'};
-    return spi_transmit_byte(c);
+    char c[2] = {(char)MCP2515_READ, address};
+    return spi_transmit_byte(c, 2);
 }
 
 void mcp2515_write(char address, char* data)
 {   
-    int length = sizeof(data)+3; // Command code, address and stop byte
+    int length = sizeof(data)+2; // Command code, address and stop byte
     char command[length];
     command[0] = (char) MCP2515_WRITE;
     command[1] = address;
@@ -51,31 +50,29 @@ void mcp2515_write(char address, char* data)
     {
         command[i] = data[i-2];
     }
-
-    command[length-1] = '\0';
-    spi_transmit_byte(command);
+    spi_transmit_byte(command, length);
 }
 
 void mcp2515_request_to_send()
 {
-    char command[2] = {(char) MCP2515_REQUEST_TO_SEND, '\0'};
-    spi_transmit_byte(&command);
+    char command = (char) MCP2515_REQUEST_TO_SEND;
+    spi_transmit_byte(&command, 1);
 }
 
 char mcp2515_read_status()
 {
-    char command[2] = {(char) MCP2515_READ_STATUS, '\0'};
-    return spi_transmit_byte(&command);
+    char command = (char) MCP2515_READ_STATUS;
+    return spi_transmit_byte(&command, 1);
 }
 
 void mcp2515_bit_modify(char address, char mask, char data)
 {
-    char command[5] = {(char) MCP2515_BIT_MODIFY, address, mask, data, '\0'};
-    spi_transmit_byte(command);
+    char command[4] = {(char) MCP2515_BIT_MODIFY, address, mask, data};
+    spi_transmit_byte(command, 4);
 }
 
 void mcp2515_reset()
 {
-    char command[2] = {(char) MCP2515_RESET, '\0'};
-    spi_transmit_byte(&command);
+    char command = (char) MCP2515_RESET;
+    spi_transmit_byte(&command, 1);
 }

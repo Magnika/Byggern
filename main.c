@@ -13,6 +13,7 @@
 #include "include/hsm.h"
 #include "include/spi.h"
 #include "include/mcp2515.h"
+#include "include/can.h"
 
 #include "include/interrupt.h"
 
@@ -63,6 +64,7 @@ ISR(INT2_vect)
 {
     // CAN CONTROLLER
     // Find out which CAN interrupt triggered by reading CANINTF
+    printf("Received data: %c", can_read().data[0]);
 }
 
 void main( void )
@@ -76,7 +78,7 @@ void main( void )
     configure_interrupts();
 
     spi_init();
-    mcp2515_init();
+    can_init();
     
     oled_init();
     oled_print_menu();
@@ -105,10 +107,25 @@ void main( void )
             event = EVENT_NAN;
         }
         hsm_dispatch(event);
+        
+        char string[8] = "Hallai\n\r";
+        can_frame_t test_frame;
+        
+        for(uint8_t i=0; i<8; i++)
+        {
+            test_frame.data[i]=string[i];
+        }
 
-        //mcp2515_CAN_publish('e');
-        //printf("%c", MCP2515_read_buffer());
-        //mcp2515_write('a', 'e');
+        test_frame.SIDH = 0;
+        test_frame.SIDL = 0;
+        test_frame.EID0 = 0;
+        test_frame.EID8 = 0;
+        test_frame.DLC = 8;
+
+        can_transmit(&test_frame);
+        //can_init();
+        //mcp2515_reset();
+        _delay_ms(100);
         
     }
     
