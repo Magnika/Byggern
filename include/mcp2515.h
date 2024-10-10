@@ -14,6 +14,7 @@
 #define MCP2515_READ_RX_BUFFER 0b10010000 // Receive Buffer 0, Start at RXB0SIDH
 
 #define CANCTRL_ADDR 0x0F
+#define CANINTE_ADDR 0b00101011
 
 char MCP2515_read_buffer();
 

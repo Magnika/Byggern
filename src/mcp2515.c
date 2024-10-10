@@ -4,6 +4,7 @@ void mcp2515_init()
 {
     mcp2515_reset(); // Recommended as part of powre-on procedure
     mcp2515_bit_modify(CANCTRL_ADDR, 0b11100000, 0b01000000); // Set CAN loopback mode
+    mcp2515_bit_modify(CANINTE_ADDR, 0b00000001, 0b00000001);
 }
 
 char MCP2515_read_buffer()
@@ -12,9 +13,18 @@ char MCP2515_read_buffer()
     return spi_transmit_byte(commad);
 }
 
-void mcp2515_load_buffer(char data)
+void mcp2515_load_buffer(char* data)
 {
-    char command[3] = {(char) MCP2515_LOAD_TX_BUFFER, data, '\0'};
+    int length = sizeof(data)+2; // Command code, address and stop byte
+    char command[length];
+
+    command[0] = (char) MCP2515_LOAD_TX_BUFFER;
+    for(uint8_t i=1; i<length-1; i++)
+    {
+        command[i] = data[i-1];
+    }
+    command[length-1] = '\0';
+    
     spi_transmit_byte(command);
 }
 
@@ -30,9 +40,19 @@ char mcp2515_read(char address)
     return spi_transmit_byte(c);
 }
 
-void mcp2515_write(char address, char data)
-{
-    char command[4] = {(char) MCP2515_WRITE, address, data, '\0'};
+void mcp2515_write(char address, char* data)
+{   
+    int length = sizeof(data)+3; // Command code, address and stop byte
+    char command[length];
+    command[0] = (char) MCP2515_WRITE;
+    command[1] = address;
+
+    for(uint8_t i=2; i<length-1; i++)
+    {
+        command[i] = data[i-2];
+    }
+
+    command[length-1] = '\0';
     spi_transmit_byte(command);
 }
 
