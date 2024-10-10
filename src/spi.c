@@ -12,15 +12,19 @@ void spi_init()
 }
 
 
-char spi_transmit_byte(char byte)
+char spi_transmit_byte(char* bytes)
 {
+    int length = strlen(bytes);
     /* Set SS' low */
     PORTB = (0<<PB4);
 
-    /* Start transmission */
-    SPDR = byte;
-    /* Wait for transmission complete */
-    while(!(SPSR & (1<<SPIF)));
+    for(int i=0;i<length; i++)
+    {
+        /* Send byte transmission */
+        SPDR = bytes[i];
+        /* Wait for transmission complete */
+        while(!(SPSR & (1<<SPIF)));
+    }
 
     /* Read response in SPDR */
     char response = SPDR;

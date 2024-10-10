@@ -2,6 +2,7 @@
 #define SPI_H
 
 #include "avr.h"
+#include <string.h>
 
 /**
  * @brief Initializes SPI as master
@@ -10,11 +11,12 @@
 void spi_init();
 
 /**
- * @brief Transmits a single byte. Reads the response (MISO) from SPI data register.
+ * @brief Transmits a set of bytes. Reads the response (MISO) from SPI data register.
+ * num is number of bytes you want to send, ex: instruction, address, data => num=3
  * 
- * @param byte 
+ * @param bytes 
  * @return char 
  */
-char spi_transmit_byte(char byte);
+char spi_transmit_byte(char* bytes);
 
 #endif // SPI_H
