@@ -18,7 +18,7 @@
 
 char MCP2515_read_buffer();
 
-void mcp2515_load_buffer(char data);
+void mcp2515_load_buffer(char* data);
 
 void mcp2515_CAN_publish(char data);
 
@@ -26,7 +26,7 @@ void mcp2515_init();
 
 char mcp2515_read(char address);
 
-void mcp2515_write(char address, char data);
+void mcp2515_write(char address, char* data);
 
 void mcp2515_request_to_send();
 
