@@ -3,6 +3,8 @@
 
 #include "avr.h"
 #include <string.h>
+#include <stdio.h>
+#include <util/delay.h> // Delay functions
 
 /**
  * @brief Initializes SPI as master
@@ -17,6 +19,6 @@ void spi_init();
  * @param bytes 
  * @return char 
  */
-char spi_transmit_byte(char* bytes, int length);
+void spi_transmit_byte(char* bytes, int length, int lenghtReceive, char* response);
 
 #endif // SPI_H

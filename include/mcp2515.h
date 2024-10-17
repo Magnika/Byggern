@@ -2,6 +2,8 @@
 #define MCP2515_H
 
 #include "spi.h"
+#include <util/delay.h> // Delay functions
+
 
 // Instruction set
 #define MCP2515_RESET 0b11000000

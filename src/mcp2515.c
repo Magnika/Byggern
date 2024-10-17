@@ -3,14 +3,17 @@
 void mcp2515_init()
 {
     mcp2515_reset(); // Recommended as part of powre-on procedure
+    _delay_us(100);
     mcp2515_bit_modify(CANCTRL_ADDR, 0b11100000, 0b01000000); // Set CAN loopback mode
     mcp2515_bit_modify(CANINTE_ADDR, 0b00000001, 0b00000001);
 }
 
 char MCP2515_read_buffer()
 {
+    char message;
     char command = (char) MCP2515_READ_RX_BUFFER;
-    return spi_transmit_byte(&command, 1);
+    spi_transmit_byte(&command, 1, 1, &message);
+    return message;
 }
 
 void mcp2515_load_buffer(char* data)
@@ -24,7 +27,7 @@ void mcp2515_load_buffer(char* data)
         command[i] = data[i-1];
     }
     
-    spi_transmit_byte(command, length);
+    spi_transmit_byte(command, length, 0, NULL);
 }
 
 void mcp2515_CAN_publish(char data)
@@ -35,8 +38,10 @@ void mcp2515_CAN_publish(char data)
 
 char mcp2515_read(char address)
 {
+    char message;
     char c[2] = {(char)MCP2515_READ, address};
-    return spi_transmit_byte(c, 2);
+    spi_transmit_byte(c, 2,1, &message);
+    return message;
 }
 
 void mcp2515_write(char address, char* data)
@@ -50,29 +55,31 @@ void mcp2515_write(char address, char* data)
     {
         command[i] = data[i-2];
     }
-    spi_transmit_byte(command, length);
+    spi_transmit_byte(command, length, 0, NULL);
 }
 
 void mcp2515_request_to_send()
 {
     char command = (char) MCP2515_REQUEST_TO_SEND;
-    spi_transmit_byte(&command, 1);
+    spi_transmit_byte(&command, 1, 0, NULL);
 }
 
 char mcp2515_read_status()
 {
+    char message;
     char command = (char) MCP2515_READ_STATUS;
-    return spi_transmit_byte(&command, 1);
+    spi_transmit_byte(&command, 1, 1, &message);
+    return message;
 }
 
 void mcp2515_bit_modify(char address, char mask, char data)
 {
     char command[4] = {(char) MCP2515_BIT_MODIFY, address, mask, data};
-    spi_transmit_byte(command, 4);
+    spi_transmit_byte(command, 4, 0, NULL);
 }
 
 void mcp2515_reset()
 {
     char command = (char) MCP2515_RESET;
-    spi_transmit_byte(&command, 1);
+    spi_transmit_byte(&command, 1, 0, NULL);
 }
