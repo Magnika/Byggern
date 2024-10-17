@@ -86,4 +86,36 @@ Joystick:
 OLED:
 - Use 8080 parallell interface, might have to pin select it
 - ![alt text](pictures/OLED_timing.png)
-- 
+
+
+## Task 5
+- SPI driver
+  - The SPI Master initiates the
+  communication cycle when pulling low the Slave Select SS pin of the desired Slave. Master and
+  Slave prepare the data to be sent in their respective Shift Registers, and the Master generates
+  the required clock pulses on the SCK line to interchange data. Data is always shifted from Mas-
+  ter to Slave on the Master Out – Slave In, MOSI, line, and from Slave to Master on the Master In
+  – Slave Out, MISO, line. After each data packet, the Master will synchronize the Slave by pulling
+  high the Slave Select, SS, line.
+  
+  - Procedure
+    - Set SS'low
+    - Write byte to SPDR (SPI Data Register). This starts the SPI clock generator.
+    - After shifting one byte, the SPI clock generator stops, setting the End of
+      Transmission Flag (SPIF). If the SPI Interrupt Enable bit (SPIE) in the SPCR Register is set, an
+      interrupt is requested. The Master may continue to shift the next byte by writing it into SPDR, or
+      signal the end of packet by pulling high the Slave Select, SS line.
+    - The last incoming byte will be kept in the buffer register for later use.
+  
+- The system is single buffered in the transmit direction and double buffered in the receive direc-
+  tion. This means that bytes to be transmitted cannot be written to the SPI Data Register before
+  the entire shift cycle is completed. When receiving data, however, a received character must be
+  read from the SPI Data Register before the next character has been completely shifted in. Oth-
+  erwise, the first byte is lost.
+
+## MCP2515
+- The MCP2515 expects the first byte after lowering CS to be the instruction/ command byte. This implies that CS must
+  be raised and then lowered again to invoke another command.
+
+- It is highly recommended that the Reset command be sent (or the RESET pin be lowered) as part of the power-on
+  initialization sequence.

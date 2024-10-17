@@ -11,6 +11,11 @@
 #include "include/joystick.h"
 #include "include/oled.h"
 #include "include/hsm.h"
+#include "include/spi.h"
+#include "include/mcp2515.h"
+#include "include/can.h"
+
+#include "include/interrupt.h"
 
 #include <util/delay.h> // Delay functions
 #include <stdio.h>
@@ -43,6 +48,25 @@ static int USART_get_char(FILE *stream)
 
 static FILE usart_std_out = FDEV_SETUP_STREAM(USART_put_char, USART_get_char, _FDEV_SETUP_RW);
 
+// CONFIGURE INTERRUPST IN MAIN, DOES NOT WORK IN C OR HEADER FOR SOME REASON
+ISR(INT0_vect)
+{
+    // TODO: Implement
+    printf("hei\n\r");
+}
+
+ISR(INT1_vect)
+{
+    // TODO: Implement
+}
+
+ISR(INT2_vect)
+{
+    // CAN CONTROLLER
+    // Find out which CAN interrupt triggered by reading CANINTF
+    printf("Received data: %c \n\r", can_read().data[0]);
+}
+
 void main( void )
 {
     USART_Init ( MYUBRR );
@@ -51,6 +75,10 @@ void main( void )
     SRAM_init();
     avr_pwm_configure();
     joystick_init();
+    configure_interrupts();
+
+    spi_init();
+    can_init();
     
     oled_init();
     oled_print_menu();
@@ -79,7 +107,30 @@ void main( void )
             event = EVENT_NAN;
         }
         hsm_dispatch(event);
-        _delay_ms(10);        
+        
+        char string[8] = "Hallai\n\r";
+        can_frame_t test_frame;
+        
+        for(uint8_t i=0; i<8; i++)
+        {
+            test_frame.data[i]=string[i];
+        }
+
+        test_frame.SIDH = 0;
+        test_frame.SIDL = 0;
+        test_frame.EID0 = 0;
+        test_frame.EID8 = 0;
+        test_frame.DLC = 8;
+
+        can_transmit(&test_frame);
+        printf("1: %c ", can_read().data[0]);
+        printf("2: %c ", can_read().data[1]);
+        printf("3: %c ", can_read().data[2]);
+        printf("4: %c ", can_read().data[3]);
+        printf("5: %c ", can_read().data[4]);
+        printf("6: %c\n\r", can_read().data[5]);
+        _delay_ms(100);
+        
     }
     
 }
