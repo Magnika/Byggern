@@ -65,7 +65,12 @@ ISR(INT2_vect)
 {
     // CAN CONTROLLER
     // Find out which CAN interrupt triggered by reading CANINTF
-    printf("Received data: %c \n\r", can_read().data[0]);
+    printf("1: %c ", can_read().data[0]);
+    printf("2: %c ", can_read().data[1]);
+    printf("3: %c ", can_read().data[2]);
+    printf("4: %c ", can_read().data[3]);
+    printf("5: %c ", can_read().data[4]);
+    printf("6: %c\n\r", can_read().data[5]);
 
     mcp2515_bit_modify(CANINTF_ADDR, 0b00000001, 0b0); // Unset the interrupt flag at the can controller. This must be done manually or the intf is always raised.
 }
@@ -126,12 +131,6 @@ void main( void )
         test_frame.DLC = 8;
 
         can_transmit(&test_frame);
-        //printf("1: %c ", can_read().data[0]);
-        //printf("2: %c ", can_read().data[1]);
-        //printf("3: %c ", can_read().data[2]);
-        //printf("4: %c ", can_read().data[3]);
-        //printf("5: %c ", can_read().data[4]);
-        //printf("6: %c\n\r", can_read().data[5]);
         _delay_ms(100);
         
     }
