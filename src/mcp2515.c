@@ -3,9 +3,10 @@
 void mcp2515_init()
 {
     mcp2515_reset(); // Recommended as part of powre-on procedure
-    _delay_us(100);
+    _delay_us(100); // Need to delay after reset for some reason.
+
     mcp2515_bit_modify(CANCTRL_ADDR, 0b11100000, 0b01000000); // Set CAN loopback mode
-    mcp2515_bit_modify(CANINTE_ADDR, 0b00000001, 0b00000001);
+    mcp2515_bit_modify(CANINTE_ADDR, 0b00000001, 0b00000001); // Configure interrupt
 }
 
 char MCP2515_read_buffer()
