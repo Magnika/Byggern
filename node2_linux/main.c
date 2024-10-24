@@ -17,6 +17,15 @@
  */
 //#include "../path_to/uart.h"
 
+CanInit can_default = {
+    .brp = BRP,
+    .phase1 = 3,
+    .propag = 3,
+    .phase2 = 3,
+    .sjw = 4,
+    .smp = 0,
+};
+
 int main()
 {
     SystemInit();
@@ -29,13 +38,14 @@ int main()
     pwm_init();
     can_init(can_default, 0);
 
-
+    CanMsg msg;
     while (1)
     {
-        printf("Hello Worlds\n\r");
+        printf("Checking for can message...\n\r");
 
-        time_spinFor(msecs(1000)); 
-        
+        if (can_rx(&msg))
+        {
+            can_printmsg(msg);
+        }
     }
-    
 }

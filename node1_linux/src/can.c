@@ -1,4 +1,4 @@
-#include "can.h"
+#include "can_node1.h"
 
 void can_init()
 {

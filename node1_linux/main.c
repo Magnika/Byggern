@@ -13,7 +13,7 @@
 #include "include/hsm.h"
 #include "include/spi.h"
 #include "include/mcp2515.h"
-#include "include/can.h"
+#include "include/can_node1.h"
 
 #include "include/interrupt.h"
 

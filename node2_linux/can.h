@@ -25,15 +25,6 @@ __attribute__((packed)) struct CanInit {
     };
 };
 
-CanInit can_default = {
-    .brp = BRP,
-    .phase1 = 3,
-    .propag = 3,
-    .phase2 = 3,
-    .sjw = 4,
-    .smp = 0,
-}
-
 
 // Initialize CAN bus, with bit timings and optional interrupt
 // If `rxInterrupt` is not 0, an interrupt will be triggered when a message is received.
