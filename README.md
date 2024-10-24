@@ -119,3 +119,10 @@ OLED:
 
 - It is highly recommended that the Reset command be sent (or the RESET pin be lowered) as part of the power-on
   initialization sequence.
+
+## Task 6
+Servo out pins
+  - Signal = Arduino D21 = Atmel SAM3X8E PB13
+  - Printing in console
+    - Make sure that Baud Rate is the same as specified in uart_init().
+    - to print in console run "sudo minicom -D /dev/ttyACM0"

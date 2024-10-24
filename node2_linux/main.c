@@ -29,7 +29,9 @@ int main()
 
     while (1)
     {
-        printf("Hello World\n\r");
+        printf("Hello Worlds\n\r");
+
+        time_spinFor(msecs(1000)); 
         
     }
     
