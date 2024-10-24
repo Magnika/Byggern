@@ -45,6 +45,7 @@ int main()
 
         if (can_rx(&msg))
         {
+            printf("CAN message detected!\n\r");
             can_printmsg(msg);
         }
     }
