@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdarg.h>
+#include <uart.h>
 #include "sam.h"
+#include "time.h"
+#include "servo.h"
 
 /*
  * Remember to update the Makefile with the (relative) path to the uart.c file.
@@ -20,12 +23,14 @@ int main()
     WDT->WDT_MR = WDT_MR_WDDIS; //Disable Watchdog Timer
 
     //Uncomment after including uart above
-    //uart_init(/*cpufreq*/, /*baud*/);
-    //printf("Hello World\n\r");
+    uart_init(F_CPU, 9600);
+
+    servo_test();
 
     while (1)
     {
-        /* code */
+        printf("Hello World\n\r");
+        
     }
     
 }

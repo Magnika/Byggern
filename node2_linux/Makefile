@@ -8,8 +8,8 @@ MCUTYPE = __SAM3X8E__
 SOURCE_FILES = \
 	$(BOOTUP) \
 	main.c \
-#	../path_to/uart.c \
-#   filename1.c \
+	uart.c \
+   	servo.c \
 #   filename2.c \
 #	filenameN.c
 

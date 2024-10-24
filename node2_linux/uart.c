@@ -1,7 +1,4 @@
-#include "sam.h"
-#include <stdio.h>
-
-#define F_CPU 84000000
+#include <uart.h>
 
 typedef struct RingBuf RingBuf;
 struct RingBuf {
@@ -103,6 +100,7 @@ void UART_Handler(){
 
 extern int _end;
 #include <sys/stat.h>
+
 
 void *_sbrk(int incr){
     static unsigned char *heap = NULL;
