@@ -11,7 +11,7 @@ SOURCE_FILES = \
 	uart.c \
    	servo.c \
     time.c \
-#	filenameN.c
+ 	can.c   \
 
 # Feel free to ignore anything below this line
 VPATH:= $(dir $(SOURCE_FILES))

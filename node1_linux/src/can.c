@@ -34,7 +34,7 @@ can_frame_t can_read()
     msg_received.SIDL = mcp2515_read(RXB0SIDH_ADDR+1);
     msg_received.EID8 = mcp2515_read(RXB0SIDH_ADDR+2);
     msg_received.EID0 = mcp2515_read(RXB0SIDH_ADDR+3);
-    msg_received.DLC = mcp2515_read(RXB0SIDH_ADDR+4);
+    msg_received.DLC  = mcp2515_read(RXB0SIDH_ADDR+4);
 
     for(uint8_t i=0; i<8; i++)
     {

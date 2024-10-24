@@ -3,6 +3,11 @@
 
 #include <stdint.h>
 
+#define CAN_BAUD 125000 // Baud rate
+#define TQ 800 // Time quanta in ns
+#define F_OSC 84000000 // Oscillation frequency
+#define BRP 33 // Calculated baud rate prescaler
+
 // Struct with bit timing information
 // See `can_init` for usage example
 typedef struct CanInit CanInit;
@@ -19,6 +24,15 @@ __attribute__((packed)) struct CanInit {
         uint32_t reg;
     };
 };
+
+CanInit can_default = {
+    .brp = BRP,
+    .phase1 = 3,
+    .propag = 3,
+    .phase2 = 3,
+    .sjw = 4,
+    .smp = 0,
+}
 
 
 // Initialize CAN bus, with bit timings and optional interrupt

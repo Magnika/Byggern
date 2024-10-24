@@ -4,6 +4,9 @@
 #include "spi.h"
 #include <util/delay.h> // Delay functions
 
+#define F_OSC 4915200 // Oscillation frequency
+#define TQ_NS 500 // Time quanta in ns
+
 
 // Instruction set
 #define MCP2515_RESET 0b11000000
@@ -14,6 +17,10 @@
 #define MCP2515_BIT_MODIFY 0b00000101
 #define MCP2515_LOAD_TX_BUFFER 0b01000000 // Load TX buffer 0, Start at TXB0SIDH
 #define MCP2515_READ_RX_BUFFER 0b10010000 // Receive Buffer 0, Start at RXB0SIDH
+
+#define CNF1_ADDR 0x2a
+#define CNF2_ADDR 0x29
+#define CNF3_ADDR 0x28
 
 #define CANCTRL_ADDR 0x0F
 #define CANINTE_ADDR 0b00101011

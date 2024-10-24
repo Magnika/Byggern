@@ -3,6 +3,10 @@
 
 #include "mcp2515.h"
 
+#define CAN_BAUD 125000 // Baud rate
+#define TQ 800 // Time quanta in ns
+#define F_OSC 4915200 // Oscillation frequency
+
 typedef struct
 {
     uint8_t SIDH;         // Standard identifier high byte

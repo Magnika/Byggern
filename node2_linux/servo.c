@@ -4,7 +4,7 @@
 #define DCL_PWM 0.0009     //Duty cycle of PWM signal [s]
 #define chadAdress (*(Pwm*)0x40094200)
 
-void servo_test()
+void pwm_init()
 {
     //Give power to PWM
     REG_PMC_PCER1 |= (1 << 4);

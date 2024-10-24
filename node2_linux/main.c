@@ -4,6 +4,7 @@
 #include "sam.h"
 #include "time.h"
 #include "servo.h"
+#include "can.h"
 
 /*
  * Remember to update the Makefile with the (relative) path to the uart.c file.
@@ -25,7 +26,9 @@ int main()
     //Uncomment after including uart above
     uart_init(F_CPU, 9600);
 
-    servo_test();
+    pwm_init();
+    can_init(can_default, 0);
+
 
     while (1)
     {
