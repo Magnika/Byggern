@@ -8,10 +8,10 @@ MCUTYPE = __SAM3X8E__
 SOURCE_FILES = \
 	$(BOOTUP) \
 	main.c \
-	uart.c \
-   	servo.c \
-    time.c \
- 	can.c   \
+ 	src/uart.c \
+#   filename1.c \
+#   filename2.c \
+#	filenameN.c
 
 # Feel free to ignore anything below this line
 VPATH:= $(dir $(SOURCE_FILES))

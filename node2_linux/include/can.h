@@ -3,11 +3,6 @@
 
 #include <stdint.h>
 
-#define CAN_BAUD 125000 // Baud rate
-#define TQ 800 // Time quanta in ns
-#define F_OSC 84000000 // Oscillation frequency
-#define BRP 33 // Calculated baud rate prescaler
-
 // Struct with bit timing information
 // See `can_init` for usage example
 typedef struct CanInit CanInit;
