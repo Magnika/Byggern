@@ -141,3 +141,7 @@ Servo out pins
   - Printing in console
     - Make sure that Baud Rate is the same as specified in uart_init().
     - to print in console run "sudo minicom -D /dev/ttyACM0"
+
+## NOTE FROM 26.10.
+  I ran into an issue where there is zero response from the Arduino board. Tested agains another group's board and that works. So think there is 
+  a hardware problem on our board.
