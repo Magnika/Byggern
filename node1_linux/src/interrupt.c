@@ -1,4 +1,4 @@
-#include "interrupt.h"
+#include <avr/interrupt.h>
 
 void configure_interrupts()
 {

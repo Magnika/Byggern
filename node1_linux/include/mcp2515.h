@@ -39,8 +39,13 @@
 #define RXB0SIDL_ADDR 0x62
 #define RXB0EID8_ADDR 0x63
 #define RXB0EID0_ADDR 0x64
-#define RXB0DLC 0x65
-#define RXB0D0 0x66
+#define RXB0DLC_ADDR 0x65
+#define RXB0D0_ADDR 0x66
+
+// Commands
+#define MCP2515_MODE_NORMAL 0x00
+#define MCP2515_MODE_LOOPBACK 0x40
+#define MCP2512_MODE_MASK 0b11100000
 
 // We want to achieve a CAN baud rate of 250 kHz.
 // Followin the example in the datasheet:

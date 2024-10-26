@@ -48,33 +48,6 @@ static int USART_get_char(FILE *stream)
 
 static FILE usart_std_out = FDEV_SETUP_STREAM(USART_put_char, USART_get_char, _FDEV_SETUP_RW);
 
-// CONFIGURE INTERRUPST IN MAIN, DOES NOT WORK IN C OR HEADER FOR SOME REASON
-ISR(INT0_vect)
-{
-    // TODO: Implement
-    //printf("ISR0 executed\n\r");
-}
-
-ISR(INT1_vect)
-{
-    // TODO: Implement
-    //printf("ISR1 executed\n\r");
-}
-
-ISR(INT2_vect)
-{
-    // CAN CONTROLLER
-    // Find out which CAN interrupt triggered by reading CANINTF
-    printf("1: %c ", can_read().data[0]);
-    printf("2: %c ", can_read().data[1]);
-    printf("3: %c ", can_read().data[2]);
-    printf("4: %c ", can_read().data[3]);
-    printf("5: %c ", can_read().data[4]);
-    printf("6: %c\n\r", can_read().data[5]);
-
-    mcp2515_bit_modify(CANINTF_ADDR, 0b00000001, 0b0); // Unset the interrupt flag at the can controller. This must be done manually or the intf is always raised.
-}
-
 void main( void )
 {
     USART_Init ( MYUBRR );
@@ -116,9 +89,9 @@ void main( void )
         }
         hsm_dispatch(event);
         
-        char string[8] = "Hallai\n\r";
+        char string[8] = "Hallaien";
         can_frame_t test_frame;
-        test_frame.id = 1;
+        test_frame.id = 128;
         test_frame.data_length = 8;
         
         for(uint8_t i=0; i<8; i++)
@@ -131,4 +104,28 @@ void main( void )
         
     }
     
+}
+
+// CONFIGURE INTERRUPST IN MAIN, DOES NOT WORK IN C OR HEADER FOR SOME REASON
+ISR(INT0_vect)
+{
+    // TODO: Implement
+    printf("ISR0 executed\n\r");
+}
+
+ISR(INT1_vect)
+{
+    // TODO: Implement
+    printf("ISR1 executed\n\r");
+}
+
+ISR(INT2_vect)
+{
+    // CAN CONTROLLER
+    // Find out which CAN interrupt triggered by reading CANINTF
+    can_frame_t msg;
+    can_read(&msg);
+    printf("Received %d bytes from ID %d\n\r", msg.data_length, msg.id);
+
+    mcp2515_bit_modify(CANINTF_ADDR, 0b00000001, 0b0); // Unset the interrupt flag at the can controller. This must be done manually or the intf is always raised.
 }

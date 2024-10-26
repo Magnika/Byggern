@@ -3,6 +3,7 @@
 void can_init()
 {
     mcp2515_init();
+    mcp2515_bit_modify(CANCTRL_ADDR, MCP2512_MODE_MASK, MCP2515_MODE_NORMAL); // Set CAN controller mode
 }
 
 void can_transmit(const can_frame_t* msg)
@@ -23,20 +24,19 @@ void can_transmit(const can_frame_t* msg)
     mcp2515_request_to_send();
 }
 
-can_frame_t can_read()
+void can_read(can_frame_t* msg)
 {
-    can_frame_t msg_received;
-    
     uint8_t id_high_bits = mcp2515_read(RXB0SIDH_ADDR);
     uint8_t id_low_bits = mcp2515_read(RXB0SIDL_ADDR);
-    msg_received.id = (id_low_bits >> 5) + (id_high_bits << 3); // Inverse of transmit function
+    msg->id = (id_low_bits >> 5) + (id_high_bits << 3); // Inverse of transmit function
 
-    msg_received.data_length = mcp2515_read(RXB0DLC);
+    msg->data_length = mcp2515_read(RXB0DLC_ADDR);
 
-    for(uint8_t i=0; i<8; i++)
+    for(int i=0; i<msg->data_length; i++)
     {
-        msg_received.data[i] = mcp2515_read(RXB0D0+i);
+        msg->data[i] = mcp2515_read(RXB0D0_ADDR+i);
     }
-    
-    return msg_received;
+
+    printf("id high = %d\n\r", id_high_bits);
+    printf("data[0] = %c\n\r", msg->data[0]);
 }

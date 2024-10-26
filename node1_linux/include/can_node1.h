@@ -14,11 +14,10 @@ typedef struct
     char data[8];
 } can_frame_t;
 
-
 void can_init();
 
 void can_transmit(const can_frame_t* msg);
 
-can_frame_t can_read();
+void can_read(can_frame_t* msg);
 
 #endif // CAN_H
