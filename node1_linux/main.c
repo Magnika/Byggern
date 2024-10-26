@@ -126,6 +126,11 @@ ISR(INT2_vect)
     can_frame_t msg;
     can_read(&msg);
     printf("Received %d bytes from ID %d\n\r", msg.data_length, msg.id);
+    for(uint8_t i=0;i<msg.data_length;i++)
+    {
+        printf("%c", msg.data[i]);
+    }
+    printf("\n\r");
 
     mcp2515_bit_modify(CANINTF_ADDR, 0b00000001, 0b0); // Unset the interrupt flag at the can controller. This must be done manually or the intf is always raised.
 }
