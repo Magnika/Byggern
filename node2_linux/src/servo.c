@@ -1,4 +1,4 @@
-#include "servo.h"
+#include "include/servo.h"
 
 #define P_PWM 0.02         //Period of PWM signal [s]
 #define DCL_PWM 0.0009     //Duty cycle of PWM signal [s]

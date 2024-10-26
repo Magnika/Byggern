@@ -1,6 +1,5 @@
-
-#include "sam.h"
-#include "../../../lib/can/can.h"
+#include "sam/sam3x/include/sam.h"
+#include "include/can.h"
 #include <stdio.h>
 
 void can_printmsg(CanMsg m){

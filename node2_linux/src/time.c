@@ -1,7 +1,7 @@
-#include <sam.h>
+#include "sam/sam3x/include/sam.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "time.h"
+#include "include/time.h"
 
 
 uint64_t calib;

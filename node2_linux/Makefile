@@ -9,8 +9,8 @@ SOURCE_FILES = \
 	$(BOOTUP) \
 	main.c \
  	src/uart.c \
-#   filename1.c \
-#   filename2.c \
+	src/time.c \
+ 	src/can.c \
 #	filenameN.c
 
 # Feel free to ignore anything below this line
