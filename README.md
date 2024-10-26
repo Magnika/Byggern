@@ -1,4 +1,5 @@
 # Byggern
+Supply voltage from supply is 8-12V
 
 ## Immediate TODO
 - Rename print function to "printf". It seems to be used by the SRAM test function.
@@ -119,6 +120,15 @@ OLED:
 
 - It is highly recommended that the Reset command be sent (or the RESET pin be lowered) as part of the power-on
   initialization sequence.
+
+## Task 5
+CAN communication Node 2
+  - 8 independent message objects (mailboxes) are implemented. These are buffers or channels. 
+  - We communicate via the user interface to the mailboxes, i.e. mb configuration, reads and writes.
+  - All controllers on a CAN bus must have the same bit rate and bit length.
+  - The CAN_BR register defines the sampling pint in the bit time period. CAN_BR must be set before the CAN controller is enabled by setting the CANEN field in the
+    CAN_MR register.
+  - Once the CAN controller is enabled, bus synchronizaton is done automatically.
 
 ## Task 6
 Servo out pins
