@@ -3,7 +3,7 @@
 void can_init()
 {
     mcp2515_init();
-    mcp2515_bit_modify(CANCTRL_ADDR, MCP2512_MODE_MASK, MCP2515_MODE_LOOPBACK); // Set CAN controller mode
+    mcp2515_bit_modify(CANCTRL_ADDR, MCP2512_MODE_MASK, MCP2515_MODE_NORMAL); // Set CAN controller mode
 }
 
 void can_transmit(can_frame_t* msg)
