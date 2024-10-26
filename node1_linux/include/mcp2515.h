@@ -17,18 +17,30 @@
 #define MCP2515_LOAD_TX_BUFFER 0b01000000 // Load TX buffer 0, Start at TXB0SIDH
 #define MCP2515_READ_RX_BUFFER 0b10010000 // Receive Buffer 0, Start at RXB0SIDH
 
+// Address map
 #define CNF1_ADDR 0x2a
 #define CNF2_ADDR 0x29
 #define CNF3_ADDR 0x28
 
 #define CANCTRL_ADDR 0x0F
-#define CANINTE_ADDR 0b00101011
+#define CANINTE_ADDR 0x2B
 #define CANINTF_ADDR 0x2C
 
-#define TBX0CTRL_ADDR 0b00110000
+#define TXB0CTRL_ADDR 0x30
+#define TXB0SIDH_ADDR 0x31
+#define TXB0SIDL_ADDR 0x32
+#define TXB0EID8_ADDR 0x33
+#define TXB0EID0_ADDR 0x34
+#define TXB0DLC_ADDR 0x35
+#define TXB0D0_ADDR 0x36
 
-#define RXB0CTRL_ADDR 0b01100000
-#define RXB0SIDH_ADDR 0b01100001
+#define RXB0CTRL_ADDR 0x60
+#define RXB0SIDH_ADDR 0x61
+#define RXB0SIDL_ADDR 0x62
+#define RXB0EID8_ADDR 0x63
+#define RXB0EID0_ADDR 0x64
+#define RXB0DLC 0x65
+#define RXB0D0 0x66
 
 // We want to achieve a CAN baud rate of 250 kHz.
 // Followin the example in the datasheet:

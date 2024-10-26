@@ -118,17 +118,13 @@ void main( void )
         
         char string[8] = "Hallai\n\r";
         can_frame_t test_frame;
+        test_frame.id = 1;
+        test_frame.data_length = 8;
         
         for(uint8_t i=0; i<8; i++)
         {
             test_frame.data[i]=string[i];
         }
-
-        test_frame.SIDH = 0;
-        test_frame.SIDL = 0;
-        test_frame.EID0 = 0;
-        test_frame.EID8 = 0;
-        test_frame.DLC = 8;
 
         can_transmit(&test_frame);
         _delay_ms(10);
