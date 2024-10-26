@@ -89,10 +89,10 @@ void main( void )
         }
         hsm_dispatch(event);
         
-        char string[8] = "Hallaien";
+        char string[8] = "Hei";
         can_frame_t test_frame;
         test_frame.id = 5;
-        test_frame.data_length = 8;
+        test_frame.data_length = 3;
         
         for(uint8_t i=0; i<8; i++)
         {

@@ -3,7 +3,7 @@
 void can_init()
 {
     mcp2515_init();
-    mcp2515_bit_modify(CANCTRL_ADDR, MCP2512_MODE_MASK, MCP2515_MODE_NORMAL); // Set CAN controller mode
+    mcp2515_bit_modify(CANCTRL_ADDR, MCP2512_MODE_MASK, MCP2515_MODE_LOOPBACK); // Set CAN controller mode
 }
 
 void can_transmit(can_frame_t* msg)
@@ -36,7 +36,4 @@ void can_read(can_frame_t* msg)
     {
         msg->data[i] = mcp2515_read(RXB0D0_ADDR+i);
     }
-
-    printf("id high = %d\n\r", id_high_bits);
-    printf("data[0] = %c\n\r", msg->data[0]);
 }
