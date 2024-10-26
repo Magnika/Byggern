@@ -1,6 +1,11 @@
 # Byggern
 Supply voltage from supply is 8-12V
 
+## Terminal setup
+Connect VGA cable to PC, that's the RS that communication uses.
+Run: minicom -D /dev/ttyS0 to start logging.
+Set baud to 9600 and 7N1.
+
 ## Immediate TODO
 - Rename print function to "printf". It seems to be used by the SRAM test function.
 - Verify memory map implementation
