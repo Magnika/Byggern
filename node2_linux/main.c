@@ -10,8 +10,7 @@
 int main()
 {
     SystemInit();
-
-    //WDT->WDT_MR = WDT_MR_WDDIS; //Disable Watchdog Timer
+    WDT->WDT_MR = WDT_MR_WDDIS; //Disable Watchdog Timer
 
     uart_init(CPU_FREQ, UART_BAUD);
     printf("Hello World\n\r");
