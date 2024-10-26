@@ -12,10 +12,10 @@ void spi_init()
 }
 
 
-void spi_transmit_byte(char* bytes, int length, int lenghtReceive, char* response)
+void spi_transmit_bytes(char* bytes, int length, int lenghtReceive, char* response)
 {
     /* Set SS' low */
-    PORTB = (0<<PB4);
+    unset_CS();
 
     for(int i=0;i<length; i++)
     {
@@ -32,7 +32,31 @@ void spi_transmit_byte(char* bytes, int length, int lenghtReceive, char* respons
         response[i] = SPDR;
     }
     /* Set SS' high */
-    PORTB = (1<<PB4);
+    set_CS();
 
     _delay_us(50); // Delay is needed to correctly save response, don't know why.
+}
+
+void spi_transmit_byte(char data)
+{
+    SPDR = data;
+
+    while(!(SPSR & (1<<SPIF)));
+}
+
+void set_CS()
+{
+    PORTB |= (1<<PB4);
+}
+
+void unset_CS()
+{
+    PORTB &= ~(1<<PB4);
+}
+
+char spi_read()
+{
+    // Trigger a receive
+    spi_transmit_byte(0);
+    return SPDR;
 }

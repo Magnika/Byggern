@@ -91,7 +91,7 @@ void main( void )
         
         char string[8] = "Hallaien";
         can_frame_t test_frame;
-        test_frame.id = 128;
+        test_frame.id = 5;
         test_frame.data_length = 8;
         
         for(uint8_t i=0; i<8; i++)

@@ -6,9 +6,9 @@ void can_init()
     mcp2515_bit_modify(CANCTRL_ADDR, MCP2512_MODE_MASK, MCP2515_MODE_NORMAL); // Set CAN controller mode
 }
 
-void can_transmit(const can_frame_t* msg)
+void can_transmit(can_frame_t* msg)
 {
-    mcp2515_bit_modify(CANINTE_ADDR, 0b00000100, 0x00);
+    //mcp2515_bit_modify(CANINTE_ADDR, 0b00000100, 0x00);
 
     mcp2515_write(TXB0SIDH_ADDR, msg->id >> 3); // SID>10:3> resides in the SIDH register, p.19.
     mcp2515_write(TXB0SIDL_ADDR, msg->id % 8 << 5); // Extract the bottom 3 bits from id (modulo 8 operation gives the bits 3:0, modulo 16 gives 4:0 etc..). Then left-shift to place at correct spot in register.

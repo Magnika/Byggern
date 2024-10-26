@@ -16,7 +16,7 @@ typedef struct
 
 void can_init();
 
-void can_transmit(const can_frame_t* msg);
+void can_transmit(can_frame_t* msg);
 
 void can_read(can_frame_t* msg);
 
