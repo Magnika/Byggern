@@ -6,9 +6,9 @@ void mcp2515_init()
     _delay_us(100); // Need to delay after reset for some reason.
 
     /* CAN bit timing */
-    mcp2515_bit_modify(CNF3_ADDR, 0b00000111, 0b010); // Set phase 2 time segment to 3 TQ
-    mcp2515_bit_modify(CNF1_ADDR, 0xFF, 0b11000001); // Set synchronization jump width (4) and baud rate prescaler (1)
-    mcp2515_bit_modify(CNF2_ADDR, 0xFF, 0b10010010); // Set length of PS2 determined by CNF3, sample once, PS1=3, Propagation=3
+    mcp2515_bit_modify(CNF1_ADDR, 0xff, TQ_SJW | (BRP -1));
+    mcp2515_bit_modify(CNF2_ADDR, 0xFF, BTLMODE | SAM | PHSEG1 | PRSEG);
+    mcp2515_bit_modify(CNF3_ADDR, 0xFF, WAKFIL_DISABLED | PHSEG2);
 
     mcp2515_bit_modify(CANCTRL_ADDR, 0b11100000, 0b00000000); // Set CAN normal mode
     //mcp2515_bit_modify(CANCTRL_ADDR, 0b11100000, 0b01000000); // Set CAN loopback mode

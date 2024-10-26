@@ -52,13 +52,13 @@ static FILE usart_std_out = FDEV_SETUP_STREAM(USART_put_char, USART_get_char, _F
 ISR(INT0_vect)
 {
     // TODO: Implement
-    printf("ISR0 executed\n\r");
+    //printf("ISR0 executed\n\r");
 }
 
 ISR(INT1_vect)
 {
     // TODO: Implement
-    printf("ISR1 executed\n\r");
+    //printf("ISR1 executed\n\r");
 }
 
 ISR(INT2_vect)
@@ -131,7 +131,7 @@ void main( void )
         test_frame.DLC = 8;
 
         can_transmit(&test_frame);
-        _delay_ms(100);
+        _delay_ms(10);
         
     }
     
