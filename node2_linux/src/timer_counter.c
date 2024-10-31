@@ -3,10 +3,6 @@
 
 void timer_counter_init()
 {
-    // Configure clock to generate timer interrupt
-    // Configure timer interrupt
-    // Configure Counter Overflow Interrupt (COVFS)
-
     /* Clear the write protection bit */
     TC0->TC_WPMR |= (0x54494D << SMC_WPCR_WP_KEY_Pos);
     TC0->TC_WPMR &= 0xFFFFFFFF & ~(TC_WPMR_WPEN);
