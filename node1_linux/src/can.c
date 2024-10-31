@@ -8,8 +8,6 @@ void can_init()
 
 void can_transmit(can_frame_t* msg)
 {
-    //mcp2515_bit_modify(CANINTE_ADDR, 0b00000100, 0x00);
-
     mcp2515_write(TXB0SIDH_ADDR, msg->id >> 3); // SID>10:3> resides in the SIDH register, p.19.
     mcp2515_write(TXB0SIDL_ADDR, msg->id % 8 << 5); // Extract the bottom 3 bits from id (modulo 8 operation gives the bits 3:0, modulo 16 gives 4:0 etc..). Then left-shift to place at correct spot in register.
     mcp2515_write(TXB0DLC_ADDR, msg->data_length);

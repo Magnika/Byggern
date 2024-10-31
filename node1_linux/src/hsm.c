@@ -20,6 +20,7 @@ void hsm_run()
 
 static void state_option_1(uint8_t event)
 {
+    printf("In state_option_1\n\r");
     switch (event)
     {
     case EVENT_ENTRY:
@@ -44,6 +45,7 @@ static void state_option_1(uint8_t event)
 
 static void state_option_2(uint8_t event)
 {
+    printf("In state_option_2\n\r");
     switch (event)
     {
     case EVENT_ENTRY:
@@ -68,6 +70,7 @@ static void state_option_2(uint8_t event)
 
 static void state_option_3(uint8_t event)
 {
+    printf("In state_option_3\n\r");
     switch (event)
     {
     case EVENT_ENTRY:

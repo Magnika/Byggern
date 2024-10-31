@@ -107,4 +107,10 @@ int8_t joystick_get_direction_y();
  */
 void joystick_init();
 
+/**
+ * @brief Transmit joystick position over CAN. Interval is 0-200 for both directions.
+ * 
+ */
+void joystick_transmit_position_over_can();
+
 #endif // JOYSTICK_H

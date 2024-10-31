@@ -1,4 +1,5 @@
 #include "joystick.h"
+#include "can_node1.h"
 
 void joystick_update(struct JoystickVoltage* pJoystickVoltage, struct SliderVoltage* pSliderVoltage, struct JoystickState* pJoystickState)
 {
@@ -119,4 +120,19 @@ int8_t joystick_get_direction_y()
 void joystick_init()
 {
     DDRD &= (0b11111101 << DD1);
+}
+
+void joystick_transmit_position_over_can()
+{
+    int angle_x_mapped = get_joystick_angle_x() + 100;
+    int angle_y_mapped = get_joystick_angle_y() + 100;
+    printf("Sending joystick x = %d\n\r", angle_x_mapped);
+
+    can_frame_t msg;
+    msg.id = 1;
+    msg.data[0] = (uint8_t) angle_x_mapped;
+    msg.data[1] = (uint8_t) angle_y_mapped;
+    msg.data_length = 2;
+    
+    can_transmit(&msg);
 }

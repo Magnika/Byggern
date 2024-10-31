@@ -68,18 +68,22 @@ void main( void )
     uint8_t event;
     while (1)
     {
+        printf("Loop iteration\n\r");
         joystick_update(&joystickVoltage, &sliderVoltage, &joystickState);
         if(joystickState.isJoystickActuatedYRisingEdge==1)
         {
+            printf("EVENT_JOYSTICK_UP\n\r");
             event = EVENT_JOYSTICK_UP;
         }
         else if(joystickState.isJoystickActuatedYRisingEdge==-1)
         {
+            printf("EVENT_JOYSTICK_DOWN\n\r");
             event = EVENT_JOYSTICK_DOWN;
         }
         
         else if(joystickState.isButtonPressedRisingEdge)
         {
+            printf("EVENT_JOYSTICK_PUSHED\n\r");
             event = EVENT_JOYSTICK_PUSHED;
         }
 
@@ -89,18 +93,19 @@ void main( void )
         }
         hsm_dispatch(event);
         
-        char string[8] = "Hei";
-        can_frame_t test_frame;
-        test_frame.id = 5;
-        test_frame.data_length = 3;
-        
-        for(uint8_t i=0; i<8; i++)
-        {
-            test_frame.data[i]=string[i];
-        }
-
-        can_transmit(&test_frame);
-        _delay_ms(200);
+        //char string[8] = "Hei";
+        //can_frame_t test_frame;
+        //test_frame.id = 5;
+        //test_frame.data_length = 3;
+        //
+        //for(uint8_t i=0; i<8; i++)
+        //{
+        //    test_frame.data[i]=string[i];
+        //}
+//
+        //can_transmit(&test_frame);
+        joystick_transmit_position_over_can();
+        _delay_ms(10);
         
     }
     
