@@ -100,7 +100,7 @@ void main( void )
         }
 
         can_transmit(&test_frame);
-        _delay_ms(10);
+        _delay_ms(200);
         
     }
     
