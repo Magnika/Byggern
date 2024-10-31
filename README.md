@@ -6,12 +6,8 @@ Connect VGA cable to PC, that's the RS that communication uses.
 Run: minicom -D /dev/ttyS0 to start logging.
 Set baud to 9600 and 7N1.
 
-## Immediate TODO
-- Rename print function to "printf". It seems to be used by the SRAM test function.
-- Verify memory map implementation
-- Implement address decoder using NAND-gates.
-- Set the SRE bit in the MCUCR register (DONE)
-- 
+For ATSAM, unplug and replug the Atmel ICE if you have errors building. It might be registered as new device.
+dmesg --follow to see.
 
 ## Task 1
 - Made USART support

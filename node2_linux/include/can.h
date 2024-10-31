@@ -3,6 +3,15 @@
 
 #include <stdint.h>
 
+#define SMP 0x1
+#define PHASE1 0x50
+#define PHASE2 0x6
+#define PROPAG 0x100
+#define SJW 0x3000
+#define BRP 0x140000
+#define SMP 0x1000000
+#define CAN_BR_SETTINGS (SMP | BRP | SJW | PROPAG | PHASE1 | PHASE2)
+
 // Struct with bit timing information
 // See `can_init` for usage example
 typedef struct CanInit CanInit;
