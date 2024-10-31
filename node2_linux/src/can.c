@@ -10,7 +10,7 @@ void can_printmsg(CanMsg m){
     for(uint8_t i = 1; i < m.length; i++){
         printf(", %d", m.byte[i]);
     }
-    printf("})\n");
+    printf("})\n\r");
 }
 
 
@@ -114,7 +114,6 @@ uint8_t can_rx(CanMsg* m){
 
 // Example CAN interrupt handler
 void CAN0_Handler(void){
-    printf("Running CAN0_Handler\n\r");
     CanMsg msg;
     char can_sr = CAN0->CAN_SR; 
     

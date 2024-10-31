@@ -31,8 +31,6 @@ int main()
     {
         time_spinFor(msecs(1000));
         printf("Loop iteration\n\r");
-        can_rx(&msg);
-        can_printmsg(msg);
     }
     
 }
