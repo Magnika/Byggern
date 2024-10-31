@@ -56,22 +56,27 @@
 // SyncSeg=1TQ and PropSeg=2TQ. We set PS1=6TQ. This limits PS2 to 8 TQ.
 // PS2 = 7TQ. This limits SJW to 6 TQ.
 // We set SJW to its max. value of 4.
-// The total bit time is then 7+6+2+1=16TQ.
-#define TQ_PROP_SEG 2
-#define TQ_SYNC_SEG 1
-#define TQ_PS1 6
-#define TQ_PS2 7
-#define N_TQ 16 // Number of time quantas in 1 bit time
-#define TQ_SJW (0b11 << 6) // Sync jump width
-#define BRP 2 // NOTE: not the same as the baud rate bits! See MCP2515 datasheet.
-#define BTLMODE 0x80 // Length of PS2 determined by PHSEG22:PHSEG20 bits of CNF3
-#define SAM 0x40 // Sample 3x at sample point, why not
-#define PHSEG1 (0x30) // TQ_PS1-1
-#define PRSEG 0x1 // TQ_PROG_SEG-1
+// The total bit time is then 7+6+2+1=16TQ
+// NOTE: MUST READ DATASHEET, SOME OF THE REGISTER VALUES HAVE 1 SUBTRACTED
+#define PRSEG 1
+#define PHSEG1 5
+#define PHSEG2 6 // See datasheet p.45
+#define SJW 4 // Sync jump width
+#define BRP 1 // NOTE: not the same as the baud rate bits! See MCP2515 datasheet.
+#define BTLMODE 1 // Length of PS2 determined by PHSEG22:PHSEG20 bits of CNF3
+#define SAM 1 // Sample 3x at sample point, why not
+#define WAKFIL_ENABLE 1 // Wake-up filter enable
+#define WAKFIL_DISABLE 0// Wake-up filter disable
 
-#define WAKFIL_ENABLED 0x40 // Wake-up filter enable
-#define WAKFIL_DISABLED 0x00 // Wake-up filter disable
-#define PHSEG2 (TQ_PS2-1) // See datasheet p.45
+#define BRP_OFFSET 0
+#define SJW_OFFSET 6
+#define PRSEG_OFFSET 0
+#define PHSEG1_OFFSET 3
+#define PHSEG2_OFFSET 0
+#define SAM_OFFSET 6
+#define BTLMODE_OFFSET 7
+#define WAKFIL_OFFSET 6
+#define SOF_OFFSET 7
 
 char MCP2515_read_buffer();
 

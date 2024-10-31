@@ -3,12 +3,14 @@
 void mcp2515_init()
 {
     mcp2515_reset(); // Recommended as part of powre-on procedure
-    _delay_us(100); // Need to delay after reset for some reason.
+    //_delay_us(100); // Need to delay after reset for some reason.
+    _delay_ms(200);
 
     /* CAN bit timing */
-    mcp2515_bit_modify(CNF1_ADDR, 0xff, TQ_SJW | (BRP -1));
-    mcp2515_bit_modify(CNF2_ADDR, 0xFF, BTLMODE | SAM | PHSEG1 | PRSEG);
-    mcp2515_bit_modify(CNF3_ADDR, 0xFF, WAKFIL_DISABLED | PHSEG2);
+    mcp2515_write(CNF1_ADDR, (SJW << SJW_OFFSET) | BRP);
+    mcp2515_write(CNF2_ADDR, (BTLMODE << BTLMODE_OFFSET) | (SAM << SAM_OFFSET) | (PHSEG1 << PHSEG1_OFFSET) | (PRSEG << PRSEG_OFFSET));
+    mcp2515_write(CNF3_ADDR, (WAKFIL_ENABLE << WAKFIL_OFFSET) | (PHSEG2 << PHSEG2_OFFSET));
+
     mcp2515_bit_modify(CANINTE_ADDR, 0b00000001, 0b00000001); // Configure interrupt
 }
 
