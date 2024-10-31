@@ -1,11 +1,13 @@
 # Byggern
+Supply voltage from supply is 8-12V
 
-## Immediate TODO
-- Rename print function to "printf". It seems to be used by the SRAM test function.
-- Verify memory map implementation
-- Implement address decoder using NAND-gates.
-- Set the SRE bit in the MCUCR register (DONE)
-- 
+## Terminal setup
+Connect VGA cable to PC, that's the RS that communication uses.
+Run: minicom -D /dev/ttyS0 to start logging.
+Set baud to 9600 and 7N1.
+
+For ATSAM, unplug and replug the Atmel ICE if you have errors building. It might be registered as new device.
+dmesg --follow to see.
 
 ## Task 1
 - Made USART support
@@ -119,3 +121,23 @@ OLED:
 
 - It is highly recommended that the Reset command be sent (or the RESET pin be lowered) as part of the power-on
   initialization sequence.
+
+## Task 5
+CAN communication Node 2
+  - 8 independent message objects (mailboxes) are implemented. These are buffers or channels. 
+  - We communicate via the user interface to the mailboxes, i.e. mb configuration, reads and writes.
+  - All controllers on a CAN bus must have the same bit rate and bit length.
+  - The CAN_BR register defines the sampling pint in the bit time period. CAN_BR must be set before the CAN controller is enabled by setting the CANEN field in the
+    CAN_MR register.
+  - Once the CAN controller is enabled, bus synchronizaton is done automatically.
+
+## Task 6
+Servo out pins
+  - Signal = Arduino D21 = Atmel SAM3X8E PB13
+  - Printing in console
+    - Make sure that Baud Rate is the same as specified in uart_init().
+    - to print in console run "sudo minicom -D /dev/ttyACM0"
+
+## NOTE FROM 26.10.
+  I ran into an issue where there is zero response from the Arduino board. Tested agains another group's board and that works. So think there is 
+  a hardware problem on our board.
