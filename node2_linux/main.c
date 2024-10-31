@@ -5,6 +5,7 @@
 #include "include/time.h"
 #include "include/can.h"
 #include "include/pwm.h"
+#include "include/timer_counter.h"
 
 #define CPU_FREQ 84000000
 #define UART_BAUD 9600
@@ -18,6 +19,7 @@ int main()
     printf("Hello World\n\r");
 
     pwm_init();
+    timer_counter_init();
     
     CanInit can_settings;
     can_settings.reg = CAN_BR_SETTINGS;

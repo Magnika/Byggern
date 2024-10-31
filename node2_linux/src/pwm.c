@@ -32,9 +32,6 @@ void pwm_init()
     /* Configure the period for each channel */
     REG_PWM_CPRD1 = (int) (PWM_PERIOD);
 
-    /* Configure channel 1 as synchronous */
-    //REG_PWM_SCM |= PWM_SCM_SYNC1;
-
     /* Set update mode 1*/
     REG_PWM_SCM |= PWM_SCM_UPDM_MODE1;
 
