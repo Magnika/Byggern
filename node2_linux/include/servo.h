@@ -4,4 +4,4 @@
 
 #define F_CPU 84e6
 
-void pwm_init();
+void servo_init();

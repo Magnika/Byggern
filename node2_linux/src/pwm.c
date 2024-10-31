@@ -1,10 +1,11 @@
-#include "include/servo.h"
+#include "include/pwm.h"
 
 #define P_PWM 0.02         //Period of PWM signal [s]
 #define DCL_PWM 0.0009     //Duty cycle of PWM signal [s]
 #define chadAdress (*(Pwm*)0x40094200)
+#define PWM_PERIOD (P_PWM * F_CPU/64)
 
-void servo_init()
+void pwm_init()
 {
     //Give power to PWM
     REG_PMC_PCER1 |= (1 << 4);
@@ -29,7 +30,13 @@ void servo_init()
     REG_PWM_CMR1 |= 0b1100;
 
     /* Configure the period for each channel */
-    REG_PWM_CPRD1 = (int) (P_PWM * F_CPU/64);
+    REG_PWM_CPRD1 = (int) (PWM_PERIOD);
+
+    /* Configure channel 1 as synchronous */
+    //REG_PWM_SCM |= PWM_SCM_SYNC1;
+
+    /* Set update mode 1*/
+    REG_PWM_SCM |= PWM_SCM_UPDM_MODE1;
 
 
     /* Configure the duty cycle */
@@ -61,4 +68,9 @@ void servo_init()
     /* Enble PWM on channel 1 */
     REG_PWM_ENA = PWM_ENA_CHID1;
 
+}
+
+void pwm_set_duty_cycle()
+{
+    REG_PWM_CDTYUPD1 = (uint32_t) (PWM_PERIOD);
 }

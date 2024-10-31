@@ -12,6 +12,7 @@ SOURCE_FILES = \
 	src/time.c \
  	src/can.c \
 	src/servo.c \
+	src/pwm.c \
 #	filenameN.c
 
 # Feel free to ignore anything below this line
