@@ -84,7 +84,6 @@ void pwm_set_duty_cycle(int percentage)
     }
 
     float duty_cycle = percentage_scaled*PWM_PERIOD/100.0;
-    printf("Duty cycle = %f\n\r", duty_cycle);
 
     REG_PWM_CDTYUPD1 = (uint32_t) (PWM_PERIOD - duty_cycle);
 }

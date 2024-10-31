@@ -4,7 +4,6 @@
 #include "include/uart.h"
 #include "include/time.h"
 #include "include/can.h"
-#include "include/servo.h"
 #include "include/pwm.h"
 
 #define CPU_FREQ 84000000

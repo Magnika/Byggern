@@ -11,7 +11,6 @@ SOURCE_FILES = \
  	src/uart.c \
 	src/time.c \
  	src/can.c \
-	src/servo.c \
 	src/pwm.c \
 #	filenameN.c
 
