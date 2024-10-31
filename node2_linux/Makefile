@@ -11,6 +11,7 @@ SOURCE_FILES = \
  	src/uart.c \
 	src/time.c \
  	src/can.c \
+	src/servo.c \
 #	filenameN.c
 
 # Feel free to ignore anything below this line

@@ -2,4 +2,6 @@
 #include "uart.h"
 #include "component/component_pwm.h"
 
+#define F_CPU 84e6
+
 void pwm_init();
