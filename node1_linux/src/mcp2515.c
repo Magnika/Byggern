@@ -3,7 +3,6 @@
 void mcp2515_init()
 {
     mcp2515_reset(); // Recommended as part of powre-on procedure
-    //_delay_us(100); // Need to delay after reset for some reason.
     _delay_ms(200);
 
     /* CAN bit timing */
