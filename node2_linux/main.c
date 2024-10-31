@@ -27,8 +27,12 @@ int main()
     CanMsg msg;
     while (1)
     {
-        //pwm_set_duty_cycle();
-        time_spinFor(msecs(10));
+        pwm_set_duty_cycle(100);
+        time_spinFor(msecs(2000));
+        pwm_set_duty_cycle(0);
+        time_spinFor(msecs(2000));
+        pwm_set_duty_cycle(30);
+        time_spinFor(msecs(2000));
         printf("Loop iteration\n\r");
     }
     
