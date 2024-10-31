@@ -6,8 +6,8 @@
 #include "component/component_pwm.h"
 
 #define F_CPU 84e6
-#define PWM_MAX_DUTY_CYCLE 0.105
-#define PWM_MIN_DUTY_CYCLE 0.045
+#define PWM_MAX_DUTY_CYCLE_PERCENTAGE 10.0
+#define PWM_MIN_DUTY_CYCLE_PERCENTAGE 5.0
 
 /**
  * @brief Set the duty cycle of the PWM output
