@@ -37,7 +37,8 @@ void TC0_Handler(void)
     {
         //Reading a message when one arrives and assigning data. Assigning joystick values when ID is 1
         can_rx(&msg);
-        can_printmsg(msg);
+        //can_printmsg(msg);
+        
         if(msg.id == 1)
         {
             int joystick_angle_x = msg.byte[0];

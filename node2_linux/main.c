@@ -6,6 +6,7 @@
 #include "include/can.h"
 #include "include/pwm.h"
 #include "include/timer_counter.h"
+#include "include/adc.h"
 
 #define CPU_FREQ 84000000
 #define UART_BAUD 9600
@@ -25,16 +26,13 @@ int main()
     can_settings.reg = CAN_BR_SETTINGS;
     can_init(can_settings, 1);
 
+    adc_init();
+
     
     while (1)
-    {
-        pwm_set_duty_cycle(100);
+    {   
+        print_adc_value();
         time_spinFor(msecs(2000));
-        pwm_set_duty_cycle(0);
-        time_spinFor(msecs(2000));
-        pwm_set_duty_cycle(30);
-        time_spinFor(msecs(2000));
-        printf("Loop iteration\n\r");
     }
     
 }
