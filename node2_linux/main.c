@@ -25,7 +25,7 @@ int main()
     can_settings.reg = CAN_BR_SETTINGS;
     can_init(can_settings, 1);
 
-    CanMsg msg;
+    
     while (1)
     {
         pwm_set_duty_cycle(100);

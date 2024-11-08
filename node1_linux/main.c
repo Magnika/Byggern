@@ -68,7 +68,7 @@ void main( void )
     uint8_t event;
     while (1)
     {
-        printf("Loop iteration\n\r");
+        //printf("Loop iteration\n\r");
         joystick_update(&joystickVoltage, &sliderVoltage, &joystickState);
         if(joystickState.isJoystickActuatedYRisingEdge==1)
         {

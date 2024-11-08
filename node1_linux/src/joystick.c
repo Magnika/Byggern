@@ -61,6 +61,7 @@ void joystick_update(struct JoystickVoltage* pJoystickVoltage, struct SliderVolt
 int get_joystick_angle_x()
 {
     uint8_t voltage = joystickVoltage.xValue;
+    printf("Angle X voltage: %d\r\n",voltage);
     float angle_f = ((float) voltage - (255.0f/2))/128.0f;
     int angle = (int) (angle_f * 100);
 
@@ -126,7 +127,7 @@ void joystick_transmit_position_over_can()
 {
     int angle_x_mapped = get_joystick_angle_x() + 100;
     int angle_y_mapped = get_joystick_angle_y() + 100;
-    printf("Sending joystick x = %d\n\r", angle_x_mapped);
+    //printf("Sending joystick x = %d\n\r", angle_x_mapped);
 
     can_frame_t msg;
     msg.id = 1;

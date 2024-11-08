@@ -141,3 +141,7 @@ Servo out pins
 ## NOTE FROM 26.10.
   I ran into an issue where there is zero response from the Arduino board. Tested agains another group's board and that works. So think there is 
   a hardware problem on our board.
+
+## Task 7
+we had already configured PWM signalling to the servo during task 6, so we could wire the motor up to the motor driver directly.
+Configuring the PHASE/DIR pin by making a function to set it high or low. It is conneted to AtSAM pin PC23

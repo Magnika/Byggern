@@ -13,7 +13,7 @@
  * @brief Set the duty cycle of the PWM output
  * 
  */
-void pwm_set_duty_cycle();
+void pwm_set_duty_cycle(int percentage);
 
 /**
  * @brief Initialize the PWM module

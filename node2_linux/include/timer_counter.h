@@ -5,6 +5,8 @@
 #include "uart.h"
 #include "component/component_tc.h"
 #include "component/component_pmc.h"
+#include "can.h"
+#include "pwm.h"
 
 #define F_CPU (84e6)
 #define TIMER_INTERRUPT_FREQUENCY_HZ 50
