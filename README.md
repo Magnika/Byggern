@@ -144,4 +144,7 @@ Servo out pins
 
 ## Task 7
 we had already configured PWM signalling to the servo during task 6, so we could wire the motor up to the motor driver directly.
-Configuring the PHASE/DIR pin by making a function to set it high or low. It is conneted to AtSAM pin PC23
+Configuring the PHASE/DIR pin by making a function to set it high or low. It is conneted to AtSAM pin PC23.
+
+Made the photodiode detection from the MCP602 datasheet.
+NOTE: I'm not sure the response is quick enough, but am using the lowest-level capacitor I could find.
