@@ -12,7 +12,8 @@ SOURCE_FILES = \
 	src/time.c \
  	src/can.c \
 	src/pwm.c \
-	src/timer_counter.c
+	src/timer_counter.c \
+	src/adc.c
 #	filenameN.c
 
 # Feel free to ignore anything below this line

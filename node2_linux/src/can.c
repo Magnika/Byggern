@@ -120,7 +120,6 @@ void CAN0_Handler(void){
     // RX interrupt
     if(can_sr & (1 << rxMailbox)){
         can_rx(&msg);
-        can_printmsg(msg);
     } else {
         printf("CAN0 message arrived in non-used mailbox\n\r");
     }

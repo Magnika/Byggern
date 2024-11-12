@@ -148,3 +148,13 @@ Configuring the PHASE/DIR pin by making a function to set it high or low. It is 
 
 Made the photodiode detection from the MCP602 datasheet.
 NOTE: I'm not sure the response is quick enough, but am using the lowest-level capacitor I could find.
+
+#### Use the internal ADC to read the signal and filter out valid signal states.
+We will be using the input pint A7, which corresponds to the channel CH0 for some
+fucking reason. 
+We will set the Programmable Gain Amplifier to 1, as we do not need any gain.
+
+#### Create a driver that will read the IR signal. You may want to implement a digital filter to reduce noise
+Did this in adc and main.
+
+#### Create a function that is able to count the score. This will later be used for the game application
