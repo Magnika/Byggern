@@ -37,9 +37,7 @@ void TC0_Handler(void)
 {
     if(TC0->TC_CHANNEL[0].TC_SR & TC_SR_CPCS)
     {  
-        int joystick_angle_x = (int) joystick_pos.x;
-
         //Since DT is set by percentage and voltage ranges from 0 to 200, devide by two
-        pwm_set_duty_cycle((int)(joystick_angle_x / 2));
+        pwm_set_duty_cycle((int)(joystick_pos.y / 2));
     }
 }
