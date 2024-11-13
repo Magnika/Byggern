@@ -1,4 +1,6 @@
 #include "include/timer_counter.h"
+#include "include/time.h"
+#include "include/game.h"
 
 
 void timer_counter_init()
@@ -34,18 +36,10 @@ CanMsg msg;
 void TC0_Handler(void)
 {
     if(TC0->TC_CHANNEL[0].TC_SR & TC_SR_CPCS)
-    {
-        //Reading a message when one arrives and assigning data. Assigning joystick values when ID is 1
-        can_rx(&msg);
-        //can_printmsg(msg);
-        if(msg.id == 1)
-        {
-            int joystick_angle_x = msg.byte[0];
-            int joystick_anlge_y = msg.byte[1];
+    {  
+        int joystick_angle_x = (int) joystick_pos.x;
 
-            //Since DT is set by percentage and voltage ranges from 0 to 200, devide by two
-            pwm_set_duty_cycle((int)(joystick_angle_x / 2));
-        }
-
+        //Since DT is set by percentage and voltage ranges from 0 to 200, devide by two
+        pwm_set_duty_cycle((int)(joystick_angle_x / 2));
     }
 }

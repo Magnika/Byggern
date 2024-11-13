@@ -14,7 +14,8 @@ SOURCE_FILES = \
 	src/pwm.c \
 	src/timer_counter.c \
 	src/adc.c \
-	src/encoder.c
+	src/encoder.c \
+	src/game.c
 #	filenameN.c
 
 # Feel free to ignore anything below this line

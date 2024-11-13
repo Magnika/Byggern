@@ -38,8 +38,8 @@ uint32_t encoder_sample()
     Therefore, the accurate position can be read on both TC_CV registers and concatenated to form a 32-bit word.
     The timer/counter channel 0 is cleared for each increment of IDX count value.
     TC_QISR is direction status (0 or 1).
-
     */
+   
    uint32_t measurement = TC2->TC_CHANNEL[0].TC_CV;
    printf("In encoder.c: measurement=%d\n\r", measurement);
 
