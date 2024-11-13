@@ -158,3 +158,16 @@ We will set the Programmable Gain Amplifier to 1, as we do not need any gain.
 Did this in adc and main.
 
 #### Create a function that is able to count the score. This will later be used for the game application
+
+
+## Task 8
+
+#### Setup encoder reading and read signals
+The 2 encoder channels are connected to pins PC26 and PC25 on the Atsam.
+PC25 and PC26 are used by channel 0 of TC2 when in QDEC mode.
+QDEC mode requires setting the block mode register, which will change the operating mode of the entire TC2 instance.
+You must also select XC0 as the selected clock for channel 0.
+The position measurement can be read in the TC_CV0 register.
+
+#### Setup solenoid and kick ball when joystick is pushed
+

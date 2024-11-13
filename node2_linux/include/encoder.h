@@ -5,6 +5,6 @@
 
 void encoder_init();
 
-uint16_t encoder_sample();
+uint32_t encoder_sample();
 
 #endif // ENCODER_H

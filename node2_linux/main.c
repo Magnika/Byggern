@@ -7,6 +7,7 @@
 #include "include/pwm.h"
 #include "include/timer_counter.h"
 #include "include/adc.h"
+#include "include/encoder.h"
 
 #define CPU_FREQ 84000000
 #define UART_BAUD 9600
@@ -35,6 +36,7 @@ int main()
     pwm_init();
     timer_counter_init();
     adc_init();
+    encoder_init();
 
     
     CanInit can_settings;
@@ -44,8 +46,10 @@ int main()
     
     while (1)
     {
-        int score = update_and_return_score();
-        printf("Score= %d\n\r", score);
+        // int score = update_and_return_score();
+        // printf("Score= %d\n\r", score);
+        
+        uint32_t enc = encoder_sample();
 
         time_spinFor(msecs(50));
     }
