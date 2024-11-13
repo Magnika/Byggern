@@ -112,7 +112,7 @@ void pwm_motor_set_duty_cycle(int percentage)
 
 void pwm_set_motor_direction(int direction)
 {
-    if(direction)
+    if(direction > 0)
     {
         PIOC->PIO_SODR = PIO_SODR_P23;
     }

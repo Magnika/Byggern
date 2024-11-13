@@ -47,12 +47,11 @@ int main()
     
     while (1)
     {
-        // int score = update_and_return_score();
-        // printf("Score= %d\n\r", score);
-        
-        //uint32_t enc = encoder_sample();
-
-        time_spinFor(msecs(50));
+        pwm_motor_set_duty_cycle(30);
+        pwm_set_motor_direction(1);
+        time_spinFor(msecs(500));
+        pwm_set_motor_direction(-1);
+        time_spinFor(msecs(500));
     }
     
 }
