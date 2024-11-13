@@ -7,4 +7,6 @@ void encoder_init();
 
 uint32_t encoder_sample();
 
+uint32_t encoder_direction();
+
 #endif // ENCODER_H

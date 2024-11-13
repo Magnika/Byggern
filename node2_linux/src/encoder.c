@@ -41,8 +41,13 @@ uint32_t encoder_sample()
 
     */
    uint32_t measurement = TC2->TC_CHANNEL[0].TC_CV;
-   uint32_t direction = TC2->TC_QISR;
    printf("In encoder.c: measurement=%d\n\r", measurement);
 
    return measurement;
+}
+
+uint32_t encoder_direction()
+{
+    uint32_t direction = TC2->TC_QISR;
+    return direction;
 }
