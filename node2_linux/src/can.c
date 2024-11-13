@@ -130,7 +130,7 @@ void CAN0_Handler(void){
     switch (msg.id)
     {
     case CAN_ID_JOYSTICK_POS:
-        update_joystick_pos(msg.byte[0], msg.byte[1], 0); // 0 is placeholder for now.
+        update_joystick_pos(msg.byte[0], msg.byte[1], msg.byte[2]); // 0 is placeholder for now.
         break;
     
     default:
