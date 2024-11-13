@@ -22,7 +22,7 @@ void pwm_set_duty_cycle(int percentage);
  */
 void pwm_init();
 
-void pwm_set_motor_dutycycle(int duty_cycle_percent);
+void pwm_motor_set_duty_cycle(int duty_cycle_percent);
 
 void pwm_set_motor_direction(int direction);
 

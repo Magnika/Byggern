@@ -104,3 +104,20 @@ void pwm_set_duty_cycle(int percentage)
 
     REG_PWM_CDTYUPD1 = (uint32_t) (PWM_PERIOD - duty_cycle);
 }
+
+void pwm_motor_set_duty_cycle(int percentage)
+{
+    PWM->PWM_CH_NUM[0].PWM_CDTY = (uint32_t) PWM->PWM_CH_NUM[0].PWM_CPRD*percentage/100;
+}
+
+void pwm_set_motor_direction(int direction)
+{
+    if(direction)
+    {
+        PIOC->PIO_SODR = PIO_SODR_P23;
+    }
+    else
+    {
+        PIOC->PIO_CODR = PIO_CODR_P23;
+    }
+}
