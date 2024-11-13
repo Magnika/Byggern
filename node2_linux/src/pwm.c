@@ -76,7 +76,15 @@ void pwm_init()
     PIOC->PIO_PER |= PIO_PER_P23;
     PIOC->PIO_OER |= PIO_OER_P23;
 
+    // Configure motor channel for 1Mhz clock, 20kHz frequency
+    PWM->PWM_CLK |= PWM_CLK_PREA(0) | PWM_CLK_DIVA(84);
+    PWM->PWM_CH_NUM[0].PWM_CMR = PWM_CMR_CPRE_CLKA; // Use clock A for motor PWM
+    PWM->PWM_CH_NUM[0].PWM_CPRD = 50; // 20Khz
+    PWM->PWM_CH_NUM[0].PWM_CMR &= ~(1 << 8); // Set left aligned
+    PWM->PWM_CH_NUM[0].PWM_CMR |= PWM_CMR_CPOL; // Set high polarity
 
+    // Enable PWM motor channel
+    PWM->PWM_ENA |= PWM_ENA_CHID0;
 }
 
 void pwm_set_duty_cycle(int percentage)
