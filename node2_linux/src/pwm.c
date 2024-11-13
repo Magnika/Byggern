@@ -1,8 +1,9 @@
-#include "include/servo.h"
+#include "include/pwm.h"
 
 #define P_PWM 0.02         //Period of PWM signal [s]
 #define DCL_PWM 0.0009     //Duty cycle of PWM signal [s]
 #define chadAdress (*(Pwm*)0x40094200)
+#define PWM_PERIOD (P_PWM * F_CPU/64.0)
 
 void pwm_init()
 {
@@ -29,11 +30,14 @@ void pwm_init()
     REG_PWM_CMR1 |= 0b1100;
 
     /* Configure the period for each channel */
-    REG_PWM_CPRD1 = (int) (P_PWM * F_CPU/64);
+    REG_PWM_CPRD1 = (int) (PWM_PERIOD);
+
+    /* Set update mode 1*/
+    REG_PWM_SCM |= PWM_SCM_UPDM_MODE1;
 
 
-    /* Configure the duty cycle */
-    REG_PWM_CDTY1 = (int) (P_PWM * F_CPU/64)/4;
+    /* Configure the duty cycle. Start at lowest valid duty cycle */
+    REG_PWM_CDTY1 = (int) (PWM_PERIOD - PWM_MIN_DUTY_CYCLE_PERCENTAGE*PWM_PERIOD/100);
 
     ////////////////////////////////////////////////////
     /////// Set the pin to be controlled by the PWM
@@ -61,4 +65,22 @@ void pwm_init()
     /* Enble PWM on channel 1 */
     REG_PWM_ENA = PWM_ENA_CHID1;
 
+}
+
+void pwm_set_duty_cycle(int percentage)
+{
+    float percentage_scaled = percentage*(PWM_MAX_DUTY_CYCLE_PERCENTAGE-PWM_MIN_DUTY_CYCLE_PERCENTAGE)/100.0 + PWM_MIN_DUTY_CYCLE_PERCENTAGE;
+    
+    if(percentage_scaled > PWM_MAX_DUTY_CYCLE_PERCENTAGE)
+    {
+        percentage_scaled = PWM_MAX_DUTY_CYCLE_PERCENTAGE;
+    }
+    if(percentage_scaled < PWM_MIN_DUTY_CYCLE_PERCENTAGE)
+    {
+        percentage_scaled = PWM_MIN_DUTY_CYCLE_PERCENTAGE;
+    }
+
+    float duty_cycle = percentage_scaled*PWM_PERIOD/100.0;
+
+    REG_PWM_CDTYUPD1 = (uint32_t) (PWM_PERIOD - duty_cycle);
 }

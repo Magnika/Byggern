@@ -4,9 +4,25 @@
 #include "include/uart.h"
 #include "include/time.h"
 #include "include/can.h"
+#include "include/pwm.h"
+#include "include/timer_counter.h"
+#include "include/adc.h"
 
 #define CPU_FREQ 84000000
 #define UART_BAUD 9600
+
+int update_and_return_score()
+{
+    static int score = 0;
+    static ir_threshold = 4000;
+
+    if(adc_read() < ir_threshold)
+    {
+        score++;
+    }
+
+    return score;
+}
 
 int main()
 {
@@ -15,22 +31,23 @@ int main()
 
     uart_init(CPU_FREQ, UART_BAUD);
     printf("Hello World\n\r");
+
+    pwm_init();
+    timer_counter_init();
+    adc_init();
+
     
     CanInit can_settings;
     can_settings.reg = CAN_BR_SETTINGS;
     can_init(can_settings, 1);
 
-    CanMsg msg;
-    //msg.id = 1;
-    //msg.length = 3;
-    //msg.byte[0] = 'H';
-    //msg.byte[1] = 'a';
-    //msg.byte[2] = 't';
-
+    
     while (1)
     {
-        time_spinFor(msecs(1000));
-        printf("Loop iteration\n\r");
+        int score = update_and_return_score();
+        printf("Score= %d\n\r", score);
+
+        time_spinFor(msecs(50));
     }
     
 }

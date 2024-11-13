@@ -20,10 +20,10 @@ void hsm_run()
 
 static void state_option_1(uint8_t event)
 {
-    printf("In state_option_1\n\r");
     switch (event)
     {
     case EVENT_ENTRY:
+        printf("Entering option 1\n\r");
         oled_clear_cursor();
         oled_print_cursor_at_option(1);
         break;
@@ -45,10 +45,10 @@ static void state_option_1(uint8_t event)
 
 static void state_option_2(uint8_t event)
 {
-    printf("In state_option_2\n\r");
     switch (event)
     {
     case EVENT_ENTRY:
+        printf("Entering option 2\n\r");
         oled_clear_cursor();
         oled_print_cursor_at_option(2);
         break;
@@ -70,10 +70,10 @@ static void state_option_2(uint8_t event)
 
 static void state_option_3(uint8_t event)
 {
-    printf("In state_option_3\n\r");
     switch (event)
     {
     case EVENT_ENTRY:
+        printf("Entering option 3\n\r");
         oled_clear_cursor();
         oled_print_cursor_at_option(3);
         break;
