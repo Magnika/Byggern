@@ -59,11 +59,23 @@ void pwm_init()
 
     //Remove PIO control of the pin
     REG_PIOB_PDR |= (1 << 13);
-    
-    ////////////////////////////////////////////////////
 
     /* Enble PWM on channel 1 */
     REG_PWM_ENA = PWM_ENA_CHID1;
+
+    ////////////////////////////////////////////////////
+
+    // Motor Setup
+    // Give power to motor
+    PMC->PMC_PCER0 |= (1 << ID_PIOB) | (1 << ID_PIOC);
+    // Relinquish GPIO control of the PB12 pin.
+    PIOB->PIO_ABSR |= PIO_ABSR_P12;
+    PIOB->PIO_PDR |= PIO_PDR_P12;
+
+    // Give GPIO control of PC23 pin
+    PIOC->PIO_PER |= PIO_PER_P23;
+    PIOC->PIO_OER |= PIO_OER_P23;
+
 
 }
 
