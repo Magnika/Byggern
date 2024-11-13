@@ -38,6 +38,7 @@ void TC0_Handler(void)
     if(TC0->TC_CHANNEL[0].TC_SR & TC_SR_CPCS)
     {  
         //Since DT is set by percentage and voltage ranges from 0 to 200, devide by two
+        //printf("Joystick y=%d\n\r", joystick_pos.y);
         pwm_set_duty_cycle((int)(joystick_pos.y / 2));
     }
 }

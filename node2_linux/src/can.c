@@ -125,7 +125,7 @@ void CAN0_Handler(void){
     }
 
     can_rx(&msg);
-    can_printmsg(msg);
+    //can_printmsg(msg);
 
     switch (msg.id)
     {
