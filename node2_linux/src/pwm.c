@@ -107,6 +107,14 @@ void pwm_set_duty_cycle(int percentage)
 
 void pwm_motor_set_duty_cycle(int percentage)
 {
+    if(percentage > 100)
+    {
+        percentage = 100;
+    }
+    if(percentage < 0)
+    {
+        percentage = 0;
+    }
     PWM->PWM_CH_NUM[0].PWM_CDTY = (uint32_t) PWM->PWM_CH_NUM[0].PWM_CPRD*percentage/100;
 }
 

@@ -31,7 +31,7 @@ void encoder_init()
     TC2->TC_CHANNEL[0].TC_CCR = TC_CCR_CLKEN | TC_CCR_SWTRG;
 }
 
-uint32_t encoder_sample()
+int encoder_sample()
 {
     /* 
     In parallel, the number of edges are accumulated on timer/counter channel 0 and can be read on the TC_CV0 register.
@@ -40,8 +40,8 @@ uint32_t encoder_sample()
     TC_QISR is direction status (0 or 1).
     */
    
-   uint32_t measurement = TC2->TC_CHANNEL[0].TC_CV;
-   printf("In encoder.c: measurement=%d\n\r", measurement);
+   int measurement = TC2->TC_CHANNEL[0].TC_CV;
+   //printf("In encoder.c: measurement=%d\n\r", measurement);
 
    return measurement;
 }

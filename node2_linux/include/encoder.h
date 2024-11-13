@@ -3,9 +3,11 @@
 
 #include "sam.h"
 
+#define ENCODER_RANGE 5600.0f
+
 void encoder_init();
 
-uint32_t encoder_sample();
+int encoder_sample();
 
 uint32_t encoder_direction();
 

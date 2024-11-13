@@ -1,6 +1,8 @@
 #include "include/timer_counter.h"
 #include "include/time.h"
 #include "include/game.h"
+#include "include/control.h"
+#include "include/pwm.h"
 
 
 void timer_counter_init()
@@ -38,7 +40,11 @@ void TC0_Handler(void)
     if(TC0->TC_CHANNEL[0].TC_SR & TC_SR_CPCS)
     {  
         //Since DT is set by percentage and voltage ranges from 0 to 200, devide by two
-        //printf("Joystick y=%d\n\r", joystick_pos.y);
         pwm_set_duty_cycle((int)(joystick_pos.y / 2));
+        //printf("Joystick x=%d\n\r", joystick_pos.x);
+
+        int u = pos_control_loop(joystick_pos.x);
+        //printf("Applying control u=%d\n\r",u);
+        
     }
 }

@@ -47,11 +47,13 @@ int main()
     
     while (1)
     {
-        pwm_motor_set_duty_cycle(30);
-        pwm_set_motor_direction(1);
+        uint32_t pos_meas = encoder_sample();
+        //printf("Encoder measurement=%f\n\r", 100*pos_meas/ENCODER_RANGE);
+        //pwm_motor_set_duty_cycle(30);
+        //pwm_set_motor_direction(1);
         time_spinFor(msecs(500));
-        pwm_set_motor_direction(-1);
-        time_spinFor(msecs(500));
+        //pwm_set_motor_direction(-1);
+        //time_spinFor(msecs(500));
     }
     
 }
