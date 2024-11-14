@@ -1,5 +1,5 @@
-
-#pragma once
+#ifndef CAN_H
+#define CAN_H
 
 #include <stdint.h>
 
@@ -19,6 +19,9 @@
 #define SMP_OFFSET 24
 
 #define CAN_BR_SETTINGS ((SMP <<SMP_OFFSET) | (BRP << BRP_OFFSET) | ((SJW-1) << SJW_OFFSET) | ((PROPAG-1) << PROPAG_OFFSET) | ((PHASE1-1) << PHASE1_OFFSET) | ((PHASE2-1) << PHASE2_OFFSET))
+
+
+#define CAN_ID_JOYSTICK_POS 1
 
 // Struct with bit timing information
 // See `can_init` for usage example
@@ -109,7 +112,4 @@ uint8_t can_rx(CanMsg* m);
 // Print a CAN message (using `printf`)
 void can_printmsg(CanMsg m);
 
-
-
-
-
+#endif // CAN_H

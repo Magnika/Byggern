@@ -1,5 +1,6 @@
 #include "sam/sam3x/include/sam.h"
 #include "include/can.h"
+#include "include/game.h"
 #include <stdio.h>
 
 void can_printmsg(CanMsg m){
@@ -115,17 +116,28 @@ uint8_t can_rx(CanMsg* m){
 // Example CAN interrupt handler
 void CAN0_Handler(void){
     CanMsg msg;
-    char can_sr = CAN0->CAN_SR; 
+    char can_sr = CAN0->CAN_SR;
+
+    if(!can_sr | !(1 << rxMailbox))
+    {
+        //printf("CAN0 message arrived in non-used mailbox\n\r");
+        return;
+    }
+
+    can_rx(&msg);
+    can_printmsg(msg);
+
+    switch (msg.id)
+    {
+    case CAN_ID_JOYSTICK_POS:
+        update_joystick_pos(msg.byte[0], msg.byte[1], msg.byte[2]);
+        break;
     
-    // RX interrupt
-    if(can_sr & (1 << rxMailbox)){
-        can_rx(&msg);
-        can_printmsg(msg);
-    } else {
-        printf("CAN0 message arrived in non-used mailbox\n\r");
+    default:
+        break;
     }
     
-    if(can_sr & CAN_SR_MB0){
+    if(CAN_SR_MB0){
         // Disable interrupt
         CAN0->CAN_IDR = CAN_IER_MB0;
     }

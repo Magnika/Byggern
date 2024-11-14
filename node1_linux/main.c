@@ -68,7 +68,7 @@ void main( void )
     uint8_t event;
     while (1)
     {
-        printf("Loop iteration\n\r");
+        //printf("Loop iteration\n\r");
         joystick_update(&joystickVoltage, &sliderVoltage, &joystickState);
         if(joystickState.isJoystickActuatedYRisingEdge==1)
         {
@@ -81,7 +81,7 @@ void main( void )
             event = EVENT_JOYSTICK_DOWN;
         }
         
-        else if(joystickState.isButtonPressedRisingEdge)
+        else if(joystickState.isButtonPressed)
         {
             printf("EVENT_JOYSTICK_PUSHED\n\r");
             event = EVENT_JOYSTICK_PUSHED;
