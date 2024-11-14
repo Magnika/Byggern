@@ -45,6 +45,16 @@ void TC0_Handler(void)
 
         int u = pos_control_loop(joystick_pos.x);
         //printf("Applying control u=%d\n\r",u);
+
+        if(joystick_pos.isbuttonPushed)
+        {
+            //printf("Pushed\n\r");
+            solenoid_punch();
+        }
+        else
+        {
+            solenoid_retract();
+        }
         
     }
 }

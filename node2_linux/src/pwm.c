@@ -1,4 +1,5 @@
 #include "include/pwm.h"
+#include "include/time.h"
 
 #define P_PWM 0.02         //Period of PWM signal [s]
 #define DCL_PWM 0.0009     //Duty cycle of PWM signal [s]
@@ -122,10 +123,28 @@ void pwm_set_motor_direction(int direction)
 {
     if(direction > 0)
     {
-        PIOC->PIO_SODR = PIO_SODR_P23;
+        PIOC->PIO_SODR |= PIO_SODR_P23;
     }
     else
     {
-        PIOC->PIO_CODR = PIO_CODR_P23;
+        PIOC->PIO_CODR |= PIO_CODR_P23;
     }
 }
+
+void solenoid_init()
+{
+    // Give GPIO control of PC24 pin
+    PIOC->PIO_PER |= PIO_PER_P24;
+    PIOC->PIO_OER |= PIO_OER_P24;
+}
+
+void solenoid_punch()
+{
+    PIOC->PIO_SODR |= PIO_SODR_P24;
+}
+
+void solenoid_retract()
+{
+    PIOC->PIO_CODR |= PIO_CODR_P24;
+}
+

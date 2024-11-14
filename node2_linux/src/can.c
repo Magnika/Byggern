@@ -120,17 +120,17 @@ void CAN0_Handler(void){
 
     if(!can_sr | !(1 << rxMailbox))
     {
-        printf("CAN0 message arrived in non-used mailbox\n\r");
+        //printf("CAN0 message arrived in non-used mailbox\n\r");
         return;
     }
 
     can_rx(&msg);
-    //can_printmsg(msg);
+    can_printmsg(msg);
 
     switch (msg.id)
     {
     case CAN_ID_JOYSTICK_POS:
-        update_joystick_pos(msg.byte[0], msg.byte[1], msg.byte[2]); // 0 is placeholder for now.
+        update_joystick_pos(msg.byte[0], msg.byte[1], msg.byte[2]);
         break;
     
     default:

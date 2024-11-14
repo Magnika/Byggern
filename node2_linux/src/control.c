@@ -33,7 +33,7 @@ int pos_control_loop(int pos_target)
 
     //printf("%d  |  %d\n\r", target_relative, pos_relative_percent);
     //printf("Error=%d\n\r",e);
-    printf("e_int=%f\n\r",e_int);
+    //printf("e_int=%f\n\r",e_int);
 
     return u;
 }

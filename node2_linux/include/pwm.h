@@ -26,4 +26,10 @@ void pwm_motor_set_duty_cycle(int duty_cycle_percent);
 
 void pwm_set_motor_direction(int direction);
 
+void solenoid_init();
+
+void solenoid_punch();
+
+void solenoid_retract();
+
 #endif // PWM_H

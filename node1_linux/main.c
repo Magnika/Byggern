@@ -81,7 +81,7 @@ void main( void )
             event = EVENT_JOYSTICK_DOWN;
         }
         
-        else if(joystickState.isButtonPressedRisingEdge)
+        else if(joystickState.isButtonPressed)
         {
             printf("EVENT_JOYSTICK_PUSHED\n\r");
             event = EVENT_JOYSTICK_PUSHED;

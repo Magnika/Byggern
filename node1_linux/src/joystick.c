@@ -126,7 +126,7 @@ void joystick_transmit_position_over_can()
 {
     int angle_x_mapped = get_joystick_angle_x() + 100;
     int angle_y_mapped = get_joystick_angle_y() + 100;
-    int isButtonPushed = joystickState.isButtonPressedRisingEdge;
+    int isButtonPushed = joystickState.isButtonPressed;
 
     can_frame_t msg;
     msg.id = 1;

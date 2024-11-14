@@ -12,6 +12,6 @@ typedef struct JoystickPosition
 
 extern joystickPosition_t joystick_pos;
 
-void update_joystick_pos(int x, int y, int isButtonPushed);
+void update_joystick_pos(int x, int y, int isNotPushed);
 
 #endif // GAME_H

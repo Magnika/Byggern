@@ -38,6 +38,7 @@ int main()
     timer_counter_init();
     adc_init();
     encoder_init();
+    solenoid_init();
 
     
     CanInit can_settings;
@@ -47,13 +48,20 @@ int main()
     
     while (1)
     {
-        uint32_t pos_meas = encoder_sample();
+        //uint32_t pos_meas = encoder_sample();
         //printf("Encoder measurement=%f\n\r", 100*pos_meas/ENCODER_RANGE);
         //pwm_motor_set_duty_cycle(30);
-        //pwm_set_motor_direction(1);
-        time_spinFor(msecs(500));
-        //pwm_set_motor_direction(-1);
-        //time_spinFor(msecs(500));
+        //printf("Loop iteration\n\r");
+
+        // PIOC->PIO_SODR |= PIO_SODR_P24;
+        // //Possible delay necessary here
+        // time_spinFor(msecs(10));
+        // PIOC->PIO_CODR |= PIO_CODR_P24;
+        // time_spinFor(msecs(10));
+
+
+
+
     }
     
 }
